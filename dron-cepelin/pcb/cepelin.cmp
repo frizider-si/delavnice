@@ -1,0 +1,129 @@
+Cmp-Mod V01 Created by CvPcb (25-Oct-2014 BZR 4029)-stable date = Wed 05 Aug 2015 09:59:50 AM CEST
+
+BeginCmp
+TimeStamp = /55659DE5;
+Reference = BT1;
+ValeurCmp = BATTERY;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55658961;
+Reference = C1;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /555F11C0;
+Reference = CON1;
+ValeurCmp = AVR-ISP-6;
+IdModule  = pin_array_3x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1B2D8;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1B2AB;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1B2BA;
+Reference = D3;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1B2C9;
+Reference = D4;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /555F0E4C;
+Reference = IC1;
+ValeurCmp = ATMEGA168A-A;
+IdModule  = TQFP32;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C0DA72;
+Reference = IC2;
+ValeurCmp = LB1973JA;
+IdModule  = SSOP16;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C0DA81;
+Reference = IC3;
+ValeurCmp = LB1973JA;
+IdModule  = SSOP16;
+EndCmp
+
+BeginCmp
+TimeStamp = /555F2080;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1C510;
+Reference = P2;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1C51F;
+Reference = P3;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1C52E;
+Reference = P4;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1C53D;
+Reference = P5;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /556338B5;
+Reference = S1;
+ValeurCmp = SHT21;
+IdModule  = SHT21;
+EndCmp
+
+BeginCmp
+TimeStamp = /55658551;
+Reference = S2;
+ValeurCmp = MS-5561-C;
+IdModule  = MS5607;
+EndCmp
+
+BeginCmp
+TimeStamp = /55C1BD13;
+Reference = U1;
+ValeurCmp = TSOP_2438;
+IdModule  = TSOP2438;
+EndCmp
+
+EndListe

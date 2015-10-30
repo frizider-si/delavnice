@@ -1,0 +1,35 @@
+#define DELAY_MS 1
+#define PIN_NUM 4
+
+// Mogoce priloznost, da vidijo koncni avtomat?
+#define WAIT 0
+#define TURN_ON 1
+#define TURN_OFF 2
+
+byte action; // To je v bistvu stanje
+long executeAt; // Tole je ravno obraten koncept od lastTime, a zelo primeren za avtomat, po mojem.
+
+void setup(){
+  byte i;
+  pinMode(PIN_NUM, OUTPUT);
+  // Vklopimo prekinitev na pinu 2
+  attachInterrupt(0, isr, RISING);
+  action = WAIT;
+}
+
+void loop(){
+  if ((action == TURN_ON) && (millis() >= executeAt)) {
+    digitalWrite(PIN_NUM, HIGH);
+    action = TURN_OFF;
+    executeAt = millis() + DELAY_MS;
+  }
+  if ((action == TURN_OFF) && (millis() >= executeAt)) {
+    digitalWrite(PIN_NUM, LOW);
+    action = WAIT;
+  }
+}
+
+void isr(){
+  action = TURN_ON;
+  executeAt = millis();
+}

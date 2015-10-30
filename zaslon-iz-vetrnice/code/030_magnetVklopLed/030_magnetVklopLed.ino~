@@ -1,0 +1,29 @@
+#define DELAY_MS 1000
+#define PIN_NUM 13
+
+volatile boolean interruptFlag;
+
+void setup(){
+
+  attachInterrupt(0, isr, FALLING);
+  pinMode(PIN_NUM, OUTPUT);
+  
+}
+
+void loop(){
+
+  if(interruptFlag){
+    digitalWrite(PIN_NUM, HIGH);
+    unsigned long lastTime = millis();
+    while(millis() - lastTime < DELAY_MS);
+    digitalWrite(PIN_NUM, LOW);
+    interruptFlag = false;
+  }
+  
+}
+
+void isr(){
+  
+  interruptFlag = true;
+  
+}

@@ -1,0 +1,29 @@
+// Prva ideja -- ki ni uporabna
+// Dobro bi bilo, ce bi prej spoznali Serial.write, zato da bodo imeli tu idejo, da bi izpisali rezultat.
+// Videli bodo, da ne gre zaradi kabla.
+// Mogoce bodo dobili kaksno idejo, da bi ustavili motor, prikljucili kabel in potem izpisali. Odlicno, naj se znajdejo.
+// To je potem uvod za EEPROM.
+
+#define NUM_TURNS 100
+#define PIN_NUM 4
+
+byte times_index = 0;
+long times[NUM_TURNS];
+
+void setup(){
+
+  // Omogocimo prekinitve na pinu 2 in nastavimo LED pin kot izhod
+  pinMode(PIN_NUM, OUTPUT);
+  attachInterrupt(0, isr, RISING);
+  
+}
+
+void loop() {
+}
+
+void isr() {
+  if (times_index < 100) {
+      times[times_index] = millis();
+      times_index = times_index + 1;
+  }
+}

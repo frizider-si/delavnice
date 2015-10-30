@@ -1,0 +1,22 @@
+#define LED_PIN 13
+#define DELAY_MS 1000
+
+unsigned long currentTime;
+
+void setup(){
+
+  // Nastavimo pin za LED v izhodni nacin
+  pinMode(LED_PIN, OUTPUT);
+  
+}
+
+void loop(){
+
+  currentTime = millis();
+  digitalWrite(LED_PIN, HIGH);  
+  while(millis() - currentTime < DELAY_MS);
+  digitalWrite(LED_PIN, LOW);
+  currentTime = millis();
+  while(millis() - currentTime < DELAY_MS);
+  
+}

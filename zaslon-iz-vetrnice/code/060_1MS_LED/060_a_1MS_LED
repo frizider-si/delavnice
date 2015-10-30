@@ -1,0 +1,27 @@
+// Najprej za eno samo diodo
+
+#define DELAY_MS 1000
+#define PIN_NUM 4
+
+long lastTime = millis() - 2000;  // Tole je trik, ki se ga lahko spomnijo po tem, ko vidijo, da se v zacetku vedno prizge
+
+void setup(){
+  // Na pinu 2 nastavimo interrupt
+  attachInterrupt(0, isr, RISING);
+  // Pin PIN_NUM nastavimo kot izhod
+  pinMode(PIN_NUM, OUTPUT);
+  
+}
+
+void loop(){
+  if (millis() - lastTime < DELAY_MS){
+      digitalWrite(PIN_NUM, HIGH); 
+  }
+  else {
+      digitalWrite(PIN_NUM, LOW);
+  }
+}
+
+void isr(){
+  lastTime = millis();
+}

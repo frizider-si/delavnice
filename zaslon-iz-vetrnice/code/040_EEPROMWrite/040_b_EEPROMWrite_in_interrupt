@@ -1,0 +1,41 @@
+// 1. V EEPROM pisejo absolutne case
+// 2. V EEPROM pisejo RPM
+// 3. Uvedejo zastavico magnet in prenesejo kodo v loop
+
+#include <EEPROM.h>
+
+#define EEPROM_WRITES 100
+#define PIN_NUM 4
+
+long lastTime;
+byte EEPROMIndex = 0;
+
+void setup(){
+  // Omogocimo prekinitve na pinu 2 in nastavimo LED pin kot izhod
+  pinMode(PIN_NUM, OUTPUT);
+  attachInterrupt(0, isr, RISING);
+}
+
+void loop(){
+}
+
+void isr(){
+    int RPM;
+    if(EEPROMIndex >= EEPROM_WRITES * 2){ // Kadar zapisemo vse hitrosti v EEPROM, se vklopi LED
+      digitalWrite(PIN_NUM, HIGH);
+    }
+    else {
+      RPM = 60 / ((millis() - lastTime) / 1000.0);
+      EEPROM.write(EEPROMIndex, RPM / 100);     // Najprej tako, ker jim je razumljivejse (shranis enice in desetice posebej, stotice in tisocice posebej)
+      EEPROM.write(EEPROMIndex + 1, RPM % 100);
+      // Kasneje lahko povemo, da je to potratno, ker bi lahko delili z 256.
+      
+      // EEPROM.write(EEPROMIndex, RPM / 256);      // Tako lahko shranimo vec
+      // EEPROM.write(EEPROMIndex + 1, RPM % 256);
+      
+      // EEPROM.write(EEPROMIndex, (RPM & 0xFF00) >> 8);  // To je "fizicno", na nivoju bitov
+      // EEPROM.write(EEPROMIndex - 1, RPM & 0x00FF);
+      EEPROMIndex+=2;
+    }
+    lastTime = millis();
+}

@@ -1,0 +1,25 @@
+#include <EEPROM.h>
+
+#define EEPROM_READS 100
+
+int RPM;
+short EEPROMIndex = 1;
+
+void setup(){
+
+  Serial.begin(9600);
+  
+}
+
+void loop(){
+
+  while(EEPROMIndex < EEPROM_READS * 2){
+    RPM = EEPROM.read(EEPROMIndex) << 8 | EEPROM.read(EEPROMIndex - 1);
+    Serial.print("RPM: ");
+    Serial.println(RPM);
+    EEPROMIndex +=2;
+  }
+  Serial.println("End!");
+  for(;;);
+  
+}

@@ -3,7 +3,7 @@ Začnemo iz nule. Na računalnik preko kabla USB priklopimo Arduino. Zasveti zel
 
 Potem na arduino priklopimo LEDico. Zato, da se ne skuri, omejimo tok skozi diodo z uporom. Ta naj ima upornost približno 1Kohm. Vse skupaj povežemo na vezje s slike:
 
-![LEDica na napetosti](images/dioda-sveti.png)
+![LEDica na napetosti](images/dioda-sveti.jpg)
 
 Oziroma, v živo, z opremo iz Frižiderja, bi vse skupaj lahko izgledalo nekako takole:
 
@@ -23,7 +23,7 @@ Tole do sedaj je bolj razmišljanje o uporih, LEDicah in električnih vezjih. Gr
 
 Namesto na 5V upor na našem vezju povežimo na Arduinov priključek številka 2.
 
-![LED-na-pin2](images/dioda-utripanje.png)
+![LED-na-pin2](images/dioda-utripanje.jpg)
 
 Radi bi, da naša LEDica utripa. Potrebno bo napisati ustrezni program. Na računalniku, na katerega smo priklopili Arduino, zaženemo istoimensko razvojno okolje oziroma program Arduino. V njem z New odpremo nov dokument - program. Če nam ni kdo kaj na računalniku spreminjal nastavitev, bi se moral odpreti urejevalnik s "praznim" blokom kode v programskem jeziku C:
 
@@ -37,7 +37,7 @@ Funkcija setup() se zažene takoj, ko se začne program izvajati. V njej ponavad
 
 Če želimo prižgati LED diodo, moramo najprej v funkciji setup() nastaviti pin2 tako, da povemo, da bo tam izhod (do nastavljanja pin tako, da bomo na njem brali, recimo, stanje stikala, še pridemo). To naredimo tako, da uporabimo funkcijo pinMode(). 
 
-    pinMode(13, OUTPUT);
+    pinMode(2, OUTPUT);
 
 Temu `pinMode` rečemo "funkcija". Arduino ima veliko funkcij (da ne govorimo o tem, da si lahko izmišljamo še svoje). Funkcije v programih niso kot funkcije v matematiki; funkcije v programih so bolj kot nekakšni "ukazi". Ukazi (funkcije) imajo lahko argumente; te zapišemo v oklepaje za ukazom. Z ukazom `pinMode` torej Arduino "povemo", kateri pin naj ima kakšno vlogo. Ukaz ima dva argumenta, prvi je številka pina, drugi je vloga. Vloga je lahko `OUTPUT` ali `INPUT`; tole hočemo `OUTPUT`, zato torej
 
@@ -178,7 +178,7 @@ If odloča le o ukazu (klicu funkcije, prirejanju...), ki mu sledi. Le o prvem, 
 
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(13, LOW);
+            digitalWrite(2, LOW);
             x = 1;
             y = 2;
         }
@@ -192,14 +192,14 @@ Dogovorimo se, da bomo oklepaje za `if`-om pisali tudi, kadar mu bo sledil le en
     long switchOffAt;
     
     void setup() {
-        pinMode(13, OUTPUT);
-        digitalWrite(13, HIGH);
+        pinMode(2, OUTPUT);
+        digitalWrite(2, HIGH);
         switchOffAt = millis() + 1000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(13, LOW);
+            digitalWrite(2, LOW);
         }
     }
 
@@ -212,19 +212,19 @@ Dogovorimo se, da bomo oklepaje za `if`-om pisali tudi, kadar mu bo sledil le en
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(13, OUTPUT);
-        digitalWrite(13, HIGH);
+        pinMode(2, OUTPUT);
+        digitalWrite(2, HIGH);
         switchOffAt = millis() + 1000;
         switchOnAt = millis() + 10000000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(13, LOW);
+            digitalWrite(2, LOW);
             switchOnAt = millis() + 1000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(13, HIGH);
+            digitalWrite(2, HIGH);
             switchOffAt = millis() + 1000;
         }
     }
@@ -242,20 +242,20 @@ Tule se zgodi naslednje: dioda se prižge in zapomnimo si čas, ko jo je potrebn
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(13, OUTPUT);
-        digitalWrite(13, HIGH);
+        pinMode(2, OUTPUT);
+        digitalWrite(2, HIGH);
         switchOffAt = millis() + 1000;
         switchOnAt = millis() + 10000000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(13, LOW);
+            digitalWrite(2, LOW);
             switchOnAt = millis() + 1000;
             switchOffAt = millis() + 10000000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(13, HIGH);
+            digitalWrite(2, HIGH);
             switchOffAt = millis() + 1000;
             switchOnAt = millis() + 10000000;
         }
@@ -275,19 +275,19 @@ Pri prižiganju se zgodba ponovi: ugašanje bo čez eno sekundo, prižiganje enk
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(13, OUTPUT);
+        pinMode(2, OUTPUT);
         switchOffAt = millis() + 1000;
         switchOnAt = millis();
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(13, LOW);
+            digitalWrite(2, LOW);
             switchOnAt = millis() + 1000;
             switchOffAt = millis() + 10000000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(13, HIGH);
+            digitalWrite(2, HIGH);
             switchOffAt = millis() + 1000;
             switchOnAt = millis() + 10000000;
         }
@@ -301,14 +301,14 @@ Poskusimo še nekaj bolj premetenega: namesto dveh spremenljivk, `switchOnAt` in
     byte nextState;
     
     void setup() {
-        pinMode(13, OUTPUT);
+        pinMode(2, OUTPUT);
         switchAt = millis();
         nextState = HIGH;
     }
     
     void loop() {
         if (millis() >= switchAt) {
-            digitalWrite(13, nextState);
+            digitalWrite(2, nextState);
             
             switchAt = millis() + 1000;
             if (nextState == HIGH) {
@@ -322,7 +322,7 @@ Poskusimo še nekaj bolj premetenega: namesto dveh spremenljivk, `switchOnAt` in
 
 V `setup` zabeležimo, da želimo, da `loop` takoj spremeni stanje diode, pri čemer naj bo to, naslednje stanje, `nextState`, enako `HIGH`. Za `nextState` smo rekli, naj bo tipa `byte`. Tako, za vajo.
 
-V `loop` preverimo, ali je že čas za akcijo. Če je, pač nastavimo pin 13 na `nextState`. Nato si zapomnimo, kdaj bo čas za naslednjo spremembo, `switchAt = millis()`. Nato zapišemo še, na kaj bo potrebno spremeniti stanje. Če je trenutno stanje `HIGH`, naj bo naslednje stanje `LOW` in obratno. Za "in obratno" uporabimo `else`: `else` lahko sledi `if`-u in pove, kaj naj se zgodi, če pogoj ni bil resničen.
+V `loop` preverimo, ali je že čas za akcijo. Če je, pač nastavimo pin 2 na `nextState`. Nato si zapomnimo, kdaj bo čas za naslednjo spremembo, `switchAt = millis()`. Nato zapišemo še, na kaj bo potrebno spremeniti stanje. Če je trenutno stanje `HIGH`, naj bo naslednje stanje `LOW` in obratno. Za "in obratno" uporabimo `else`: `else` lahko sledi `if`-u in pove, kaj naj se zgodi, če pogoj ni bil resničen.
 
 Ne spreglejmo, da se vse tole, kar smo pisali v `loop` godi znotraj `if`-a. Da, znotraj `if`-a imamo še en `if`. Pogoj v notranjem `if` se seveda preverja in upošteva le, če je bil izpolnjen pogoj iz zunanjega.
 

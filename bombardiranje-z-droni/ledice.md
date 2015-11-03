@@ -37,7 +37,7 @@ Funkcija setup() se zažene takoj, ko se začne program izvajati. V njej ponavad
 
 Če želimo prižgati LED diodo, moramo najprej v funkciji setup() nastaviti pin2 tako, da povemo, da bo tam izhod (do nastavljanja pin tako, da bomo na njem brali, recimo, stanje stikala, še pridemo). To naredimo tako, da uporabimo funkcijo pinMode(). 
 
-    pinMode(2, OUTPUT);
+    pinMode(13, OUTPUT);
 
 Temu `pinMode` rečemo "funkcija". Arduino ima veliko funkcij (da ne govorimo o tem, da si lahko izmišljamo še svoje). Funkcije v programih niso kot funkcije v matematiki; funkcije v programih so bolj kot nekakšni "ukazi". Ukazi (funkcije) imajo lahko argumente; te zapišemo v oklepaje za ukazom. Z ukazom `pinMode` torej Arduino "povemo", kateri pin naj ima kakšno vlogo. Ukaz ima dva argumenta, prvi je številka pina, drugi je vloga. Vloga je lahko `OUTPUT` ali `INPUT`; tole hočemo `OUTPUT`, zato torej
 
@@ -178,7 +178,7 @@ If odloča le o ukazu (klicu funkcije, prirejanju...), ki mu sledi. Le o prvem, 
 
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(2, LOW);
+            digitalWrite(13, LOW);
             x = 1;
             y = 2;
         }
@@ -192,14 +192,14 @@ Dogovorimo se, da bomo oklepaje za `if`-om pisali tudi, kadar mu bo sledil le en
     long switchOffAt;
     
     void setup() {
-        pinMode(2, OUTPUT);
-        digitalWrite(2, HIGH);
+        pinMode(13, OUTPUT);
+        digitalWrite(13, HIGH);
         switchOffAt = millis() + 1000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(2, LOW);
+            digitalWrite(13, LOW);
         }
     }
 
@@ -212,19 +212,19 @@ Dogovorimo se, da bomo oklepaje za `if`-om pisali tudi, kadar mu bo sledil le en
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(2, OUTPUT);
-        digitalWrite(2, HIGH);
+        pinMode(13, OUTPUT);
+        digitalWrite(13, HIGH);
         switchOffAt = millis() + 1000;
         switchOnAt = millis() + 10000000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(2, LOW);
+            digitalWrite(13, LOW);
             switchOnAt = millis() + 1000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(2, HIGH);
+            digitalWrite(13, HIGH);
             switchOffAt = millis() + 1000;
         }
     }
@@ -242,20 +242,20 @@ Tule se zgodi naslednje: dioda se prižge in zapomnimo si čas, ko jo je potrebn
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(2, OUTPUT);
-        digitalWrite(2, HIGH);
+        pinMode(13, OUTPUT);
+        digitalWrite(13, HIGH);
         switchOffAt = millis() + 1000;
         switchOnAt = millis() + 10000000;
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(2, LOW);
+            digitalWrite(13, LOW);
             switchOnAt = millis() + 1000;
             switchOffAt = millis() + 10000000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(2, HIGH);
+            digitalWrite(13, HIGH);
             switchOffAt = millis() + 1000;
             switchOnAt = millis() + 10000000;
         }
@@ -275,19 +275,19 @@ Pri prižiganju se zgodba ponovi: ugašanje bo čez eno sekundo, prižiganje enk
     long switchOffAt, switchOnAt;
     
     void setup() {
-        pinMode(2, OUTPUT);
+        pinMode(13, OUTPUT);
         switchOffAt = millis() + 1000;
         switchOnAt = millis();
     }
     
     void loop() {
         if (millis() >= switchOffAt) {
-            digitalWrite(2, LOW);
+            digitalWrite(13, LOW);
             switchOnAt = millis() + 1000;
             switchOffAt = millis() + 10000000;
         }
         if (millis() >= switchOnAt) {
-            digitalWrite(2, HIGH);
+            digitalWrite(13, HIGH);
             switchOffAt = millis() + 1000;
             switchOnAt = millis() + 10000000;
         }
@@ -301,14 +301,14 @@ Poskusimo še nekaj bolj premetenega: namesto dveh spremenljivk, `switchOnAt` in
     byte nextState;
     
     void setup() {
-        pinMode(2, OUTPUT);
+        pinMode(13, OUTPUT);
         switchAt = millis();
         nextState = HIGH;
     }
     
     void loop() {
         if (millis() >= switchAt) {
-            digitalWrite(2, nextState);
+            digitalWrite(13, nextState);
             
             switchAt = millis() + 1000;
             if (nextState == HIGH) {

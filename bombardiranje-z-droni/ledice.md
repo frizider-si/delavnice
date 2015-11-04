@@ -1,11 +1,11 @@
 #Oprema
 Začnemo iz nule. Na računalnik preko kabla USB priklopimo Arduino. Zasveti zelena LED dioda "ON" na Arduinu. 
 
-Potem na arduino priklopimo LEDico. Zato, da se ne skuri, omejimo tok skozi diodo z uporom. Ta naj ima upornost približno 1Kohm. Vse skupaj povežemo na vezje s slike:
+Potem na Arduino priklopimo LEDico. Zato, da se ne skuri, omejimo tok skozi diodo z uporom. Ta naj ima upornost približno 1kOhmov. Vse skupaj povežemo na vezje s slike:
 
 ![LEDica na napetosti](images/dioda-sveti.jpg)
 
-Oziroma, v živo, z opremo iz Frižiderja, bi vse skupaj lahko izgledalo nekako takole:
+Oziroma, v živo, z opremo iz Frižiderja, bi vse skupaj lahko zgledalo nekako takole:
 
 ![LEDica na napetosti](images/dioda-na-napajanje.jpg)
 
@@ -15,7 +15,7 @@ Oziroma, v živo, z opremo iz Frižiderja, bi vse skupaj lahko izgledalo nekako 
 
 Opazil boš, da sta priključka LEDice različno dolga. Daljši mora gledati proti pozitivnemu polu. Kateri je ta? Na Arduinu si na priključek 5V priključil upor. Skozenj teče elektrika, ki gre potem skozi LEDico, ki je na drugi strani ozemljena (negativni pol). Prav priključena LEDica gori stalno. Arduino smo uporabili samo kot izvor napetosti. 
 
-Kolikšna je skupna napetost na priključkih Arduina? Ok, je 5V, vsaj tako piše. Pa je res? Izmeri z univerzalnim merilnikom, katerega stikalo naj bo nastavljeno na VDC (V so Volti, enota za električno napetost, DC pa pomeni, da gre za enosmerni tok). Kako se napetost porazdeli med uporom in diodo? Če te ta zadeva muči, naredi še en eksperiment: namesto diode v vezje vključi še en enak (1Kohm) upor. Kako se napetost porazdeli med oba upora? Kaj pa, če namesto tega vzameš upor 10Kohm-ov? Kaj se zgodi, če 10Kohmski upor priključiš v vezje z LEDico?
+Kolikšna je skupna napetost na priključkih Arduina? Ok, je 5V, vsaj tako piše. Pa je res? Izmeri z univerzalnim merilnikom, katerega stikalo naj bo nastavljeno na VDC (V so Volti, enota za električno napetost, DC pa pomeni, da gre za enosmerni tok). Kako se napetost porazdeli med uporom in diodo? Če te ta zadeva muči, naredi še en eksperiment: namesto diode v vezje vključi še en enak (1kOhm) upor. Kako se napetost porazdeli med oba upora? Kaj pa, če namesto tega vzameš upor 10kOhm-ov? Kaj se zgodi, če 10kOhmski upor priključiš v vezje z LEDico?
 
 Tole do sedaj je bolj razmišljanje o uporih, LEDicah in električnih vezjih. Gremo naprej, čas je, da uporabimo Arduino za še kaj drugega kot napajalnik.
 
@@ -54,13 +54,13 @@ V funkcijo loop() spišemo kodo, s katero LEDico najprej vklopimo potem pa izklo
       delay(1000);           // počakaj 1000 ms
     }
 
-Program poženemo (gumb s puščico v desno v ukazni vrstici okna urejevalnika). 
+Program poženemo (gumb s puščico v desno v ukazni vrstici okna urejevalnika). Kaj misliš, kdaj LEDica zasveti, ko izdamo ukaz `digitalWrite(2, HIGH)` ali ukaz `digitalWrite(2, LOW)`? Bi znal skonstruirati tako vezje, kjer bi to spremenil (obrnil)?
 
 ![LED-na-pin2](images/arduino-okolje.png)
 
 Utripa?
 
-Zadevo bi radi malo poživili. Recimo tako, da LEDica utripa hitreje. Seveda lahko na dveh mestih spremenimo program (kje?), ampak ker računalničarji naradi trošimo svojo energijo po nepotrebnem, bo veliko bolje, da program spišemo tako, da časa čakanja spreminjamo na enem samem mestu. Za tako stvar uvedemo spremenljivko. Naša spremenljivka nam bo hranila vrednost, za koliko milisekund nam naj po vklopu in izklopu LEDice Arduino čaka. Spremenljivko imenujmo `cakalniCas`.
+Zadevo bi radi malo poživili. Recimo tako, da LEDica utripa hitreje. Seveda lahko na dveh mestih spremenimo program (kje?), ampak ker računalničarji neradi trošimo svojo energijo po nepotrebnem, bo veliko bolje, da program spišemo tako, da časa čakanja spreminjamo na enem samem mestu. Za tako stvar uvedemo spremenljivko. Naša spremenljivka nam bo hranila vrednost, za koliko milisekund nam naj po vklopu in izklopu LEDice Arduino čaka. Spremenljivko imenujmo `cakalniCas`.
 
     long cakalniCas = 200;
     
@@ -337,3 +337,171 @@ S tem povemo, da je čas za naslednjo spremembo 1000 milisekund po *trenutnem* �
             switchAt = switchAt + 1000;
 
 Zdaj bo utripanje toliko natančno, kot je natančna Arduinova ura. To pa je, za naše potrebe, čisto in povsem natančno.
+
+## Tipka
+
+Gremo nazaj na elektroniko. Tipka. Majhna, z gumbkom:
+
+![Tipka](images/tipka.jpg)
+
+Dajmo jo najprej zvezati v našo vezje tako, da se prepričamo, da sploh deluje. Uporabili bomo majhno tipko z kontakti na dveh straneh. Najprej se zmenimo: kontakti na isti strani so tisti, ki so zakrivljeni v isto smer. Ko pritisnemo tipko, spojimo kontakta na isti strani. Ko tipka ni pritisnjena, med kontaktoma na isti strani ni povezave. Preverimo to z vezjem:
+
+![Tipka](images/dioda-sveti-tipka.jpg)
+
+Spet smo Arduino uporabili samo kot napajalnik. Bedno? Aja, to smo najbrž naredili bolj zato, da preiskusimo novo elektronsko komponento - tipko. Zdaj vemo, kako deluje. Ko pritisnemo gumb, tok steče skozi LEDico in ta zasveti. Ko gumb ni pritisnjen, stikalo ni sklenjeno in toka skozi LEDico ni. Nas inženirje nič ne moti, če v namene preiskušanja novih stvari razvijemo naprave ali pa programe, ki so blazno enostavni. Pravzaprav prav radi razvijemo kaj enostavnega, da preiskusimo nove zadeve. Enostavne rešitve so celo zelo kul.
+
+Zdaj pa skonstruirajmo vezje, ki počne isto kot zgornje, samo tako, da bomo prižigali LEDico programsko.
+
+![LEDica in tipka na Arduinu](images/dioda-sveti-tipka-arduino.jpg)
+
+Eno priključek tipke priključimo na pozitivni pol napajanja, drugi pa preko upora 10kOhmov na maso (GND pomeni v angleščini *ground*, po slovensko pa bi temu tudi lahko rekli ozemljitev). Kaj se zgodi z napetostjo na stičišču stikala in upora, ko pritisnemo gumb na tipki? Uporabi merilnik napetosti, ga na eni strani poveži s to točko na drugi strani pa z maso. Zakaj misliš, da smo tu uporabili upor z kar veliko upornostjo? Kakšna je ta upornost v primerjavi z upornostjo kože? Znaš zmeriti?
+
+Točko stičišča med uporom in stikalom (torej tam, kjer upamo, da se napetost spremeni ob pritisku gumba na stikalo) vežemo na pin 7. Ta je tokrat očitno vhodni pin. Izhodni pin je spet 2, a morda lahko tokrat opaziš, da smo LEDico zvezali nekoliko drugače. Se bo prižgala, ko nastavimo pin 2 na HIGH ali na LOW?
+
+    const int buttonPin = 7;
+    const int ledPin =  2;
+
+    int buttonState = 0;
+
+    void setup() {
+      pinMode(buttonPin, INPUT);
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop() {
+      buttonState = digitalRead(buttonPin);
+      if (buttonState == HIGH) {
+        digitalWrite(ledPin, HIGH);
+      } 
+      else {
+        digitalWrite(ledPin, LOW);
+      }
+    }
+
+V programu je nekaj novosti. Recimo, deklaracija spremenljivk, ki hranijo številki pinov in sedaj vključujejo besedo `const`. Ta slednja je okrajšava za *constant*, torej za nekaj, kar se ne bo spreminjalo. Če taki spremenljivki v programu želimo prirediti kakšno drugo vrednost, recimo `ledPIN = 3`, bo program Arduino (tehnično pa temu rečemo *prevajalnik*) zajamral in izpisal `error: assignment of read-only variable ledPin`. Poskusi! 
+
+Nova je tudi funkcija `digitalRead`, ki ob klici prebere napetostno stanje na pinu `buttonState`. Vrne lahko samo dve stanji, HIGH ali pa LOW. Aha, zato pa ji pravimo *digitalna*. Kakšna bi lahko še bila? Kako bi se potem lahko taka sorodna funkcija imenovala? Zakaj bi jo lahko uporabili?
+
+Aja, novo je tudi to, da smo v tem programu imena pisali v angleščini. Čisto rutinsko. Nam, programerjem, se namreč to često dogaja in le redko zapišemo programe v slovenščini. Ker je vse ostalo v angleščini, tudi spremenljivke pišemo v tem jeziku. Pa še koda je bolj čitljiva za vse ostale, potem, ko jo objavimo na githubu, to je na skladišču odprtokodnih programov.
+
+Zgornji program je sicer čisto ok, ni pa ravno pravi. Bolje bi bilo, če bi ob pritisku tipke LEDica zagorela, ob ponovnem pritisku pa ugasnila. Pomisli na električarja, ki pričakuje, da nekdo stalno pritiska na gumb zato, da v kuhinji gori luč. Program bi bilo potrebno torej napisati nekoliko drugače in si zapomniti, v kakšnem stanju je naša LEDica. Poskusimo:
+
+    const int buttonPin = 7;
+    const int ledPin =  2;
+
+    int buttonState = 0;
+    int ledState = LOW;
+
+    void setup() {
+      pinMode(buttonPin, INPUT);
+      pinMode(ledPin, OUTPUT);
+      digitalWrite(ledPin, ledState);
+    }
+
+    void loop() {
+      buttonState = digitalRead(buttonPin);
+      if (buttonState == HIGH) {
+        if (ledState == LOW) {
+          ledState = HIGH;
+        }
+        else {
+          ledState = LOW;
+        }
+        digitalWrite(ledPin, ledState);
+        while (buttonState == HIGH) {
+          buttonState = digitalRead(buttonPin);
+        }
+      }
+    }
+
+Stanje LEDice si zapomnimo v spremenljivki `ledState`. To na ob zagonu programa nastavimo na LOW. Ker želimo, da tudi dejansko stanje LEDice ustreza vrednosti te spremenljivke, napetost na `ledPin` ustrezno nastavimo že ob zagonu programa.
+
+V glavni zanki programa smo spisali kar nekaj kode, ki se zažene ob pritisku tipke oziroma takrat, ko je napetost na `buttonPIN` enaka HIGH. Takrat spremenimo stanje LEDice (če je bila prej LOW je sedaj HIGH in obratno), ter to stanje tudi zapišemo na izhod `ledPin`. Sledi zanka `while`, ki izvaja kodo v zanki vse dokler je pogoj zanke, zapisan v vrstici z `while` izpolnjen. Torej, koda se tukaj izvaja vse dokler držimo pritisnjen gumb tipke. S to zanko potem čakamo na trenutek, ko tipko spet spustimo. Kar je čisto ok, ker smo le takrat pripravljeni na novi pritisk tipke in novo spremembo stanja LEDice.
+
+Vse lepo in prav. Poženem kodo in mi kot vse kaže dela. Le da se mi včasih, ampak res samo včasih zdi, kot da se tipka nekako zatakne, oziroma, kot da ne prime prav dobro. Hm, morda imam zanič tipko. Tudi ti? Kaj pa, če je narobe kaj drugega? Stiki na tipkah so lahko čisto malo hrapavi, tako da ob enem pritisku gumba pride do vrste čisto kratkih vklopov in izklopov. Temu efektu se lahko izognemo ali programsko ali pa z dodatno elektroniko (hm, nekateri ste morda že slišali za kondenzatorje). Kakorkoli, s tem se tu ne bomo preveč ukvarjali, oziroma sploh ne bomo, če res ne bo nujno potrebno. Se pravi, če bomo odkrili, da imamo močno hrapave tipke.
+
+Da bi dodatno vse skupaj preskusili, uvajamo prikazovalnik LCD. Aja, ne samo za testiranje tipk, ampak predvsem tudi zato, ker bomo LCD uporabljali tudi pri bombadronu. In ker je nasploh luštno z Arduinom kaj tudi izpisati na kakšen mini zunanji provizorični retro totalno poceni ekran.
+
+#LCD prikazovalnik
+
+Na Arduino priklopimo dvovrstični prikazovalnik LCD. Tokrat je nekaj več žičk. 
+
+![Shema z LCDjem](images/lcd.jpg)
+
+Nova elektronski element je potenciometer, ki si ga lahko predstavljamo kot dva upora, katerih upornost zvezno uravnavamo tako, da je njuna skupna upornost vedno enaka nazivni vrednosti potenciometra (pri nas recimo 10kOhmov). Bilo bi čisto fino, če njegovo delovanje preveriš z merilnikom napetosti. Boš znal? Razmisli! Če ne gre, vprašaj frižiderce. Potenciometer tu izkoristimo za uravnavanje kontrasta na LCDju.
+
+Naš LCD ima dve vrstici s po 16 znaki. Za izpisovanje nanj uporabimo knjižnico [LiquidCrystal](https://www.arduino.cc/en/Reference/LiquidCrystal), ki nam strašno poenostavi izpisovanje na LCD. Kako, si oglejmo spodaj:
+
+    #include "LiquidCrystal.h"
+    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
+     
+    void setup() {
+      lcd.begin(16, 2);
+      lcd.setCursor(0, 0);
+      lcd.print("Frizider");
+      lcd.setCursor(0, 1);
+      lcd.print("Bombadron");
+    }
+     
+    void loop() {
+    }
+
+Z vrstico `include` v program naložimo vmesnik knjižnice LiquidCrystal. V drugi vrstici inicializiramo knjižnico tako, da ji povemo, na katerih pinih imamo priključen LCD. Vrstni red pinov je seveda pomemben in mora za naše vezje biti prav tak, kot je naveden v zgornji kodi. S to vrstico smo inicializirali spremenljivko lcd, ki je tipa `LiquidCrystal`. Do sedaj smo imeli opravka s spremenljivkami tipa `int` in `long`, spremenljivka `lcd` pa je vsaj na videz precej drugačna od teh. In sicer je to spremenljivka, pravzaprav se njej reče kar objekt, ki ima metode, s katerimi počnemo razne stvari. Na primer, z metodo `begin` nastavimo tip prikazovalnika LCD (število vrstic in stolpcev). Z metodo `setCursor` povemo, na katerem mestu bi radi pričeli z našim izpisom; najprej navedemo kolono potem pa še vrstico. Z metodo `print` pa povemo, kaj bi radi izpisali.
+
+Ko poženemo zgornji program, se ne zgodi prav dosti. Nič čudnega, saj je funkcija `loop` prazna. Kaj pa, če program spremenimo tako, da nam šteje sekunde od trenutka, ko smo pognali program?
+
+    #include "LiquidCrystal.h"
+    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
+     
+    void setup() {
+      lcd.begin(16, 2);
+      lcd.setCursor(0, 0);
+      lcd.print("Cas v sekundah");
+    }
+     
+    void loop() {
+      lcd.setCursor(0, 1);
+      lcd.print(millis()/1000);
+    }
+
+#LCD šteje pritiske na tipko
+
+Priklopimo na Arduino še tipko in izpisujmo število vklopov stikala.
+
+![LCD in tipka](images/lcd-tipka.jpg)
+
+Tule je načrt: štejmo število pritiskov na tipko. Tule je rešitev:
+
+    #include "LiquidCrystal.h"
+    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
+    const int buttonPin = 7;
+    int clicks = 0;
+    int buttonState;
+
+    void setup() {
+      pinMode(buttonPin, INPUT);
+      lcd.begin(16, 2);
+      lcd.setCursor(0, 0);
+      lcd.print("Pritisni na tipko");
+    }
+     
+    void loop() {
+      lcd.setCursor(0, 1);
+      buttonState = digitalRead(buttonPin);
+      if (buttonState == HIGH) {
+        clicks = clicks + 1;
+        lcd.setCursor(0, 1);
+        lcd.print(clicks);
+        while (buttonState == HIGH) {
+          buttonState = digitalRead(buttonPin);
+        }
+      }
+    }
+
+Zgoraj smo združili do sedaj že znane finte, tako da nam je ta koda totalno razumljiva. V `setup` tokrat nastavimo vhodni pin za tipko. V glavni zanki `loop` čakamo na pritisk tipke, takrat števec pritiskov tipke povečamo za ena, število izpišemo na LCD in počakamo, da se uporabnik sistema naveliča držati gumb. Ker se vse skupaj ponavlja, smo ravno razvili eno napravo, ki se ji reče števec.
+
+#Čas je za en premor
+
+Če do sedaj še nisi programiral in razvijal naprave za Arduinom, je bilo tale malce daljša lekcija pravi zalogaj. Pričel si programirati v C-ju, uporabljati funkcije in spremenljivke, pa kontrolne stavke v C-ju, kot sta `if` in `while`. Poleg tega si prežičkal z LEDicami, upori, potenciometri in LCDji. Na koncu si celo uporabil knjižnico za izpis na LCDje. Čas je za en frižiderski premor. 
+
+Če pa ga res ne zmoreš, lahko zgornjo kodo števca spremeniš tako, da dobiš timer: pritisk tipke naj timer sproži, ponovni pritisk ga zaustavi in ponovni pritisk spet požene, a od časa, ki je bil zabeležen prej. Bi znal to zadevo sprogramirati tako, da timer ponastaviš na 0, če tipko držiš dlje časa, na primer dve sekundi?

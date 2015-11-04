@@ -1,7 +1,7 @@
-#Oprema
+## Oprema
 Začnemo iz nule. Na računalnik preko kabla USB priklopimo Arduino. Zasveti zelena LED dioda "ON" na Arduinu. 
 
-Potem na Arduino priklopimo LEDico. Zato, da se ne skuri, omejimo tok skozi diodo z uporom. Ta naj ima upornost približno 1kOhmov. Vse skupaj povežemo na vezje s slike:
+Potem na Arduino priklopimo LEDico. Zato, da se ne skuri, omejimo tok skozi diodo z uporom. Ta naj ima upornost približno 1kOhmov. Vse skupaj povežemo na vezje s slike (te in vse slike vezij smo naredili s programom [Fritzing](http://fritzing.org/)):
 
 ![LEDica na napetosti](images/dioda-sveti.jpg)
 
@@ -19,7 +19,7 @@ Kolikšna je skupna napetost na priključkih Arduina? Ok, je 5V, vsaj tako piše
 
 Tole do sedaj je bolj razmišljanje o uporih, LEDicah in električnih vezjih. Gremo naprej, čas je, da uporabimo Arduino za še kaj drugega kot napajalnik.
 
-#Prižiganje LEDice
+## Prižiganje LEDice
 
 Namesto na 5V upor na našem vezju povežimo na Arduinov priključek številka 2.
 

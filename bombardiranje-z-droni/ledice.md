@@ -422,7 +422,7 @@ Vse lepo in prav. Poženem kodo in mi kot vse kaže dela. Le da se mi včasih, a
 
 Da bi dodatno vse skupaj preskusili, uvajamo prikazovalnik LCD. Aja, ne samo za testiranje tipk, ampak predvsem tudi zato, ker bomo LCD uporabljali tudi pri bombadronu. In ker je nasploh luštno z Arduinom kaj tudi izpisati na kakšen mini zunanji provizorični retro totalno poceni ekran.
 
-#LCD prikazovalnik
+## LCD prikazovalnik
 
 Na Arduino priklopimo dvovrstični prikazovalnik LCD. Tokrat je nekaj več žičk. 
 
@@ -464,7 +464,7 @@ Ko poženemo zgornji program, se ne zgodi prav dosti. Nič čudnega, saj je funk
       lcd.print(millis()/1000);
     }
 
-#LCD šteje pritiske na tipko
+## LCD šteje pritiske na tipko
 
 Priklopimo na Arduino še tipko in izpisujmo število vklopov stikala.
 
@@ -500,7 +500,7 @@ Tule je načrt: štejmo število pritiskov na tipko. Tule je rešitev:
 
 Zgoraj smo združili do sedaj že znane finte, tako da nam je ta koda totalno razumljiva. V `setup` tokrat nastavimo vhodni pin za tipko. V glavni zanki `loop` čakamo na pritisk tipke, takrat števec pritiskov tipke povečamo za ena, število izpišemo na LCD in počakamo, da se uporabnik sistema naveliča držati gumb. Ker se vse skupaj ponavlja, smo ravno razvili eno napravo, ki se ji reče števec.
 
-#Čas je za en premor
+## Čas je za en premor
 
 Če do sedaj še nisi programiral in razvijal naprave za Arduinom, je bilo tale malce daljša lekcija pravi zalogaj. Pričel si programirati v C-ju, uporabljati funkcije in spremenljivke, pa kontrolne stavke v C-ju, kot sta `if` in `while`. Poleg tega si prežičkal z LEDicami, upori, potenciometri in LCDji. Na koncu si celo uporabil knjižnico za izpis na LCDje. Čas je za en frižiderski premor. 
 

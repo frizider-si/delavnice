@@ -15,7 +15,9 @@ Oziroma, v živo, z opremo iz Frižiderja, bi vse skupaj lahko zgledalo nekako t
 
 Opazil boš, da sta priključka LEDice različno dolga. Daljši mora gledati proti pozitivnemu polu. Kateri je ta? Na Arduinu si na priključek 5V priključil upor. Skozenj teče elektrika, ki gre potem skozi LEDico, ki je na drugi strani ozemljena (negativni pol). Prav priključena LEDica gori stalno. Arduino smo uporabili samo kot izvor napetosti. 
 
-Kolikšna je skupna napetost na priključkih Arduina? Ok, je 5V, vsaj tako piše. Pa je res? Izmeri z univerzalnim merilnikom, katerega stikalo naj bo nastavljeno na VDC (V so Volti, enota za električno napetost, DC pa pomeni, da gre za enosmerni tok). Kako se napetost porazdeli med uporom in diodo? Če te ta zadeva muči, naredi še en eksperiment: namesto diode v vezje vključi še en enak (1kOhm) upor. Kako se napetost porazdeli med oba upora? Kaj pa, če namesto tega vzameš upor 10kOhm-ov? Kaj se zgodi, če 10kOhmski upor priključiš v vezje z LEDico?
+> Kolikšna je skupna napetost na priključkih Arduina? Ok, je 5V, vsaj tako piše. Pa je res? Izmeri z univerzalnim merilnikom, katerega stikalo naj bo nastavljeno na VDC (V so Volti, enota za električno napetost, DC pa pomeni, da gre za enosmerni tok). Kako se napetost porazdeli med uporom in diodo? 
+
+> Če te ta zadeva muči, naredi še en eksperiment: namesto diode v vezje vključi še en enak (1kOhm) upor. Kako se napetost porazdeli med oba upora? Kaj pa, če namesto tega vzameš upor 10kOhm-ov? Kaj se zgodi, če 10kOhmski upor priključiš v vezje z LEDico?
 
 Tole do sedaj je bolj razmišljanje o uporih, LEDicah in električnih vezjih. Gremo naprej, čas je, da uporabimo Arduino za še kaj drugega kot napajalnik.
 
@@ -354,7 +356,11 @@ Zdaj pa skonstruirajmo vezje, ki počne isto kot zgornje, samo tako, da bomo pri
 
 ![LEDica in tipka na Arduinu](images/dioda-sveti-tipka-arduino.jpg)
 
-Eno priključek tipke priključimo na pozitivni pol napajanja, drugi pa preko upora 10kOhmov na maso (GND pomeni v angleščini *ground*, po slovensko pa bi temu tudi lahko rekli ozemljitev). Kaj se zgodi z napetostjo na stičišču stikala in upora, ko pritisnemo gumb na tipki? Uporabi merilnik napetosti, ga na eni strani poveži s to točko na drugi strani pa z maso. Zakaj misliš, da smo tu uporabili upor z kar veliko upornostjo? Kakšna je ta upornost v primerjavi z upornostjo kože? Znaš zmeriti?
+Eno priključek tipke priključimo na pozitivni pol napajanja, drugi pa preko upora 10kOhmov na maso (GND pomeni v angleščini *ground*, po slovensko pa bi temu tudi lahko rekli ozemljitev). 
+
+> Kaj se zgodi z napetostjo na stičišču stikala in upora, ko pritisnemo gumb na tipki? Uporabi merilnik napetosti, ga na eni strani poveži s to točko na drugi strani pa z maso. 
+
+> Zakaj misliš, da smo tu uporabili upor z kar veliko upornostjo? Kakšna je ta upornost v primerjavi z upornostjo kože? Znaš zmeriti?
 
 Točko stičišča med uporom in stikalom (torej tam, kjer upamo, da se napetost spremeni ob pritisku gumba na stikalo) vežemo na pin 7. Ta je tokrat očitno vhodni pin. Izhodni pin je spet 2, a morda lahko tokrat opaziš, da smo LEDico zvezali nekoliko drugače. Se bo prižgala, ko nastavimo pin 2 na HIGH ali na LOW?
 
@@ -422,86 +428,6 @@ Vse lepo in prav. Poženem kodo in mi kot vse kaže dela. Le da se mi včasih, a
 
 Da bi dodatno vse skupaj preskusili, uvajamo prikazovalnik LCD. Aja, ne samo za testiranje tipk, ampak predvsem tudi zato, ker bomo LCD uporabljali tudi pri bombadronu. In ker je nasploh luštno z Arduinom kaj tudi izpisati na kakšen mini zunanji provizorični retro totalno poceni ekran.
 
-## LCD prikazovalnik
+## Čas za en premor
 
-Na Arduino priklopimo dvovrstični prikazovalnik LCD. Tokrat je nekaj več žičk. 
-
-![Shema z LCDjem](images/lcd.jpg)
-
-Nova elektronski element je potenciometer, ki si ga lahko predstavljamo kot dva upora, katerih upornost zvezno uravnavamo tako, da je njuna skupna upornost vedno enaka nazivni vrednosti potenciometra (pri nas recimo 10kOhmov). Bilo bi čisto fino, če njegovo delovanje preveriš z merilnikom napetosti. Boš znal? Razmisli! Če ne gre, vprašaj frižiderce. Potenciometer tu izkoristimo za uravnavanje kontrasta na LCDju.
-
-Naš LCD ima dve vrstici s po 16 znaki. Za izpisovanje nanj uporabimo knjižnico [LiquidCrystal](https://www.arduino.cc/en/Reference/LiquidCrystal), ki nam strašno poenostavi izpisovanje na LCD. Kako, si oglejmo spodaj:
-
-    #include "LiquidCrystal.h"
-    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
-     
-    void setup() {
-      lcd.begin(16, 2);
-      lcd.setCursor(0, 0);
-      lcd.print("Frizider");
-      lcd.setCursor(0, 1);
-      lcd.print("Bombadron");
-    }
-     
-    void loop() {
-    }
-
-Z vrstico `include` v program naložimo vmesnik knjižnice LiquidCrystal. V drugi vrstici inicializiramo knjižnico tako, da ji povemo, na katerih pinih imamo priključen LCD. Vrstni red pinov je seveda pomemben in mora za naše vezje biti prav tak, kot je naveden v zgornji kodi. S to vrstico smo inicializirali spremenljivko lcd, ki je tipa `LiquidCrystal`. Do sedaj smo imeli opravka s spremenljivkami tipa `int` in `long`, spremenljivka `lcd` pa je vsaj na videz precej drugačna od teh. In sicer je to spremenljivka, pravzaprav se njej reče kar objekt, ki ima metode, s katerimi počnemo razne stvari. Na primer, z metodo `begin` nastavimo tip prikazovalnika LCD (število vrstic in stolpcev). Z metodo `setCursor` povemo, na katerem mestu bi radi pričeli z našim izpisom; najprej navedemo kolono potem pa še vrstico. Z metodo `print` pa povemo, kaj bi radi izpisali.
-
-Ko poženemo zgornji program, se ne zgodi prav dosti. Nič čudnega, saj je funkcija `loop` prazna. Kaj pa, če program spremenimo tako, da nam šteje sekunde od trenutka, ko smo pognali program?
-
-    #include "LiquidCrystal.h"
-    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
-     
-    void setup() {
-      lcd.begin(16, 2);
-      lcd.setCursor(0, 0);
-      lcd.print("Cas v sekundah");
-    }
-     
-    void loop() {
-      lcd.setCursor(0, 1);
-      lcd.print(millis()/1000);
-    }
-
-## LCD šteje pritiske na tipko
-
-Priklopimo na Arduino še tipko in izpisujmo število vklopov stikala.
-
-![LCD in tipka](images/lcd-tipka.jpg)
-
-Tule je načrt: štejmo število pritiskov na tipko. Tule je rešitev:
-
-    #include "LiquidCrystal.h"
-    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
-    const int buttonPin = 7;
-    int clicks = 0;
-    int buttonState;
-
-    void setup() {
-      pinMode(buttonPin, INPUT);
-      lcd.begin(16, 2);
-      lcd.setCursor(0, 0);
-      lcd.print("Pritisni na tipko");
-    }
-     
-    void loop() {
-      lcd.setCursor(0, 1);
-      buttonState = digitalRead(buttonPin);
-      if (buttonState == HIGH) {
-        clicks = clicks + 1;
-        lcd.setCursor(0, 1);
-        lcd.print(clicks);
-        while (buttonState == HIGH) {
-          buttonState = digitalRead(buttonPin);
-        }
-      }
-    }
-
-Zgoraj smo združili do sedaj že znane finte, tako da nam je ta koda totalno razumljiva. V `setup` tokrat nastavimo vhodni pin za tipko. V glavni zanki `loop` čakamo na pritisk tipke, takrat števec pritiskov tipke povečamo za ena, število izpišemo na LCD in počakamo, da se uporabnik sistema naveliča držati gumb. Ker se vse skupaj ponavlja, smo ravno razvili eno napravo, ki se ji reče števec.
-
-## Čas je za en premor
-
-Če do sedaj še nisi programiral in razvijal naprave za Arduinom, je bilo tale malce daljša lekcija pravi zalogaj. Pričel si programirati v C-ju, uporabljati funkcije in spremenljivke, pa kontrolne stavke v C-ju, kot sta `if` in `while`. Poleg tega si prežičkal z LEDicami, upori, potenciometri in LCDji. Na koncu si celo uporabil knjižnico za izpis na LCDje. Čas je za en frižiderski premor. 
-
-Če pa ga res ne zmoreš, lahko zgornjo kodo števca spremeniš tako, da dobiš timer: pritisk tipke naj timer sproži, ponovni pritisk ga zaustavi in ponovni pritisk spet požene, a od časa, ki je bil zabeležen prej. Bi znal to zadevo sprogramirati tako, da timer ponastaviš na 0, če tipko držiš dlje časa, na primer dve sekundi?
+Če do sedaj še nisi programiral in razvijal naprave za Arduinom, je bilo tale malce daljša lekcija pravi zalogaj. Pričel si programirati v C-ju, uporabljati funkcije in spremenljivke, pa kontrolne stavke v C-ju, kot sta `if` in `while`. Poleg tega si prežičkal z LEDicami in upori. Čas je za en frižiderski premor. 

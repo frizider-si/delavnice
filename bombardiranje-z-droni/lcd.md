@@ -82,44 +82,44 @@ Zgoraj smo združili do sedaj že znane finte, tako da nam mora biti ta koda tot
 
 Vezje, ki ga imamo pred sabo, je zrelo za razvoj še ene naprave. Timer. Merilec časa med dvema klikom na stikalo. Dajmo razmisliti: ob pritisku na gumb bi želeli, da se timer ponastavi na nič in začne šteti čas, recimo sekunde. Ob ponovni pritisku naj se štetje ustavi. Ob naslednjem pritisku naj se timer spet ponastavi na nič in prične šteti. Ob naslednjem pritisku... Ok, to sedaj že vemo. Naprava ima torej dve stanji. Ali šteje ali pa stoji in kaže prej zmerjeni čas. V programu je najlažje, da si zapomnemo, v katerem stanju smo, in potem ob pritisku na tipku glede na to sanje ustrezno ukrepamo.
 
-  #include "LiquidCrystal.h"
-  LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
-  const int buttonPin = 7;
-  int counter;
-  boolean counting = false;
-  long startTime;
+    #include "LiquidCrystal.h"
+    LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
+    const int buttonPin = 7;
+    int counter;
+    boolean counting = false;
+    long startTime;
 
-  void setup() {
-    pinMode(buttonPin, INPUT);
-    lcd.begin(16, 2);
-    lcd.setCursor(0, 0);
-    lcd.print("Cas v sekundah");
-  }
-   
-  void loop() {
-    float time;
-    int buttonState;
-    
-    if (counting) {
-      time = float(millis() - startTime) / 1000.0;
-      lcd.setCursor(0, 1);
-      lcd.print(time, 1);
+    void setup() {
+      pinMode(buttonPin, INPUT);
+      lcd.begin(16, 2);
+      lcd.setCursor(0, 0);
+      lcd.print("Cas v sekundah");
     }
-    
-    buttonState = digitalRead(buttonPin);
-    if (buttonState == HIGH) {
-      while (buttonState == HIGH) {
-        buttonState = digitalRead(buttonPin);
+     
+    void loop() {
+      float time;
+      int buttonState;
+      
+      if (counting) {
+        time = float(millis() - startTime) / 1000.0;
+        lcd.setCursor(0, 1);
+        lcd.print(time, 1);
       }
-      if (!counting) {
-        startTime = millis();
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Cas v sekundah");
+      
+      buttonState = digitalRead(buttonPin);
+      if (buttonState == HIGH) {
+        while (buttonState == HIGH) {
+          buttonState = digitalRead(buttonPin);
+        }
+        if (!counting) {
+          startTime = millis();
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Cas v sekundah");
+        }
+        counting = !counting;
       }
-      counting = !counting;
     }
-  }
 
 Na začetku izvajanja, v funkciji `setup()`, spet samo nastavimo vhod za tipko in ponastavimo LCD. Glavne zadeve so znova sprogramirane v funkciji `loop()`. Tu preverjamo, ali štejemo čas. Stanje, ko štejemo čas, smo si tokrat zapomnili v spremenljivki `counting`. Ta je tipa `boolean`, kar pomeni, da ima dve vrednosti, `true` ali `false`. Blok kode, ki se začne z `if (!counting)` se torej izvede le, če ima `counting` vrednost `false`: `!` v tem pogoju pomeni negacijo, torej zanika vrednost spremenljivke `counting`. Po slovensko bi to prebrali z "če trenutno ne šteješ, potem". Se pravi, če ne šteješ, si pa pritisnil na gumb, potem začni šteti. To je, zapomni si čas v spremenljivki `startTime`, počisti LCD in spet izpiši zgornjo vrstico.
 

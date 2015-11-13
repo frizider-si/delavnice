@@ -2,7 +2,7 @@
 
 Oh ne, že spet LEDice! S stikalom bomo vklapljali in izkljapljali LEDico. Ok, vem, tole smo že počeli. A namesto stalnega preverjanja, ali je slučajno gumb na stikalu pritisnjen ali ne bomo uporabili nekaj, čemur pravimo *prekinitev* ali v angleščini *interrupt*. Ideja je naslednja: ko pritisnemo na stikalo, napetost na pinu, na katerega je priključen, naraste (angleško *rising*) iz 0V na 5V. Ob tem dogodku naj se v programu pokliče ena naša funkcija, recimo `buttonPressed`. Ta naj postori vse kar je treba postoriti ob pritisku tipke.
 
-Torej, cilj: LEDica naj na začetku svetu. Ko pritisnemu tipko, naj ob stisku tipke LEDica ugasne.
+Torej, cilj: LEDica naj na začetku sveti. Ko pritisnemu tipko, naj ob stisku tipke LEDica ugasne.
 
 Začnemo z vezjem:
 

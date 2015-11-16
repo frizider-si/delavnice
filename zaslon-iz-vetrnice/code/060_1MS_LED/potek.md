@@ -25,19 +25,19 @@ V funkciji loop() se nato izvede prvi pogojni stavek(Pogoj je izpolnjen. Spremen
                  action = WAIT;
             }
         }
-#/Celotna koda programa
+    #Celotna koda programa
 
-#/define DELAY_MS 1
-#define NUM_LEDS 7
+    #define DELAY_MS 1
+    #define NUM_LEDS 7
 
-// Mogoce priloznost, da vidijo koncni avtomat?
-#define WAIT 0
-#define TURN_ON 1
-#define TURN_OFF 2
+    // Mogoce priloznost, da vidijo koncni avtomat?
+    #define WAIT 0
+    #define TURN_ON 1
+    #define TURN_OFF 2
 
-byte action; // To je v bistvu stanje
-long executeAt; // Tole je ravno obraten koncept od lastTime, a zelo primeren za avtomat, po mojem.
-const byte ledPins[] = {3,4,5,6,7,8,9}; // Je const tule res potreben?
+    byte action; // To je v bistvu stanje
+    long executeAt; // Tole je ravno obraten koncept od lastTime, a zelo primeren za avtomat, po mojem.
+    const byte ledPins[] = {3,4,5,6,7,8,9}; // Je const tule res potreben?
 
     void setup(){
         byte i;

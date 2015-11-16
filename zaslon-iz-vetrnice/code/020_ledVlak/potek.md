@@ -29,7 +29,7 @@ Poleg tega lahko na ta način "zakomentiramo" del programa. Če želimo odstrani
 
 Na Arduina pripnimo sedem diod in jih postavimo na pine od 3 do 9. (Opozorimo na nenavadno dejstvo, da lahko damo na pine od 3 do 9 sedem diod, čeprav je 9 - 3 enako 6. Zakaj?) Povežemo jih tako, kot je prikazano na spodnji shemi.
 
-![alt tag](https://github.com/frizider-si/zaslon-iz-vetrnice/blob/master/pictures/LedTrain.png)
+![alt tag](../../pictures/LedTrain.png)
 
 Zdaj bi jih radi prižgali eno za drugo, s sekundnim zamikom. Za začetek si privoščimo uporabljati `delay`, čeprav zdaj že poznamo njegove pomanjkljivosti. Kasneje bomo naredili tudi boljše.
 

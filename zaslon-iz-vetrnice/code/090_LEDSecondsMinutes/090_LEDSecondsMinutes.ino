@@ -26,7 +26,7 @@ void loop(){
     clockTime = millis();
   }
   // Pri izrisu se pomikamo za 6 stopinj(360 / 60 = 6)
-  seconds == minutes ? showLeds(seconds * 6, 1, 0b01010101): showLeds(seconds * 6, 1, 0b01010101),showLeds(minutes * 6, 1, 0b01010101);
+  seconds == minutes ? showLeds(seconds * 6, 2, 0b01010101): showLeds(seconds * 6, 2, 0b01010101),showLeds(minutes * 6, 2, 0b01010101);
   
 }
 
@@ -34,12 +34,11 @@ void showLeds(short angle, short angleWidth, uint8_t mask){
   
   unsigned long currentTime;
   // Kadar cas, preracunan v stopinje ustreza stopinjam "angle", vklopimo LED. LED so vklopljene toliko casa, dokler ne dosezejo kota "angle" + "angleWidth"
-  do
-    currentTime = micros();
-  while((currentTime - prevTime) * 360.0 / loopTime < angle || (currentTime - prevTime) * 360.0 / loopTime > angle + angleWidth);
-  manageLeds(mask);
-  while((micros() - prevTime) * 360.0 / loopTime < angle + angleWidth);
-  manageLeds(0);
+  currentTime = micros();
+  if((currentTime - prevTime) * 360.0 / loopTime >= angle && (currentTime - prevTime) * 360.0 / loopTime <= angle + angleWidth)
+    manageLeds(mask);
+  if((micros() - prevTime) * 360.0 / loopTime > angle + angleWidth)
+    manageLeds(0);
   
 }
 

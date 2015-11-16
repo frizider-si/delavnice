@@ -1,4 +1,4 @@
-    # Utripanje 
+# Utripanje 
 
 ## Prvi program
 
@@ -35,6 +35,10 @@ Vse skupaj je torej videti takole:
 
     void loop() {
     }
+
+LED povežemo tako, kot je prikazano na spodnji shemi.
+
+![alt tag](https://github.com/frizider-si/zaslon-iz-vetrnice/blob/master/pictures/OneLed.png)
 
 V `setup`, torej v začetku izvajanja programa, se izvedeta ukaza, ki povesta, da je pin 13 namenjen izhodu in da naj se na ta izhod zapiše `HIGH`.
 

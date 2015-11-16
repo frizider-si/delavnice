@@ -1,1 +1,0 @@
-Koda posameznih nalog.

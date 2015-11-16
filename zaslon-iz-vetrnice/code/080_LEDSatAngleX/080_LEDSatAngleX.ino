@@ -24,7 +24,7 @@ void loop(){
   
   // Kadar cas, preracunan v stopinje ustreza stopinjam ANGLE, vklopimo LED. LED so vklopljene toliko casa, dokler ne dosezejo kota ANGLE + ANGLE_WIDTH
   currentTime = micros();
-  if((currentTime - prevTime) * 360.0 / loopTime > ANGLE && (currentTime - prevTime) * 360.0 / loopTime < ANGLE + ANGLE_WIDTH)
+  if((currentTime - prevTime) * 360.0 / loopTime >= ANGLE && (currentTime - prevTime) * 360.0 / loopTime <= ANGLE + ANGLE_WIDTH)
     showLeds(true);
   else if((micros() - prevTime) * 360.0 / loopTime > ANGLE + ANGLE_WIDTH)
     showLeds(false);

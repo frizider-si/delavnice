@@ -8,7 +8,9 @@ Kako se to počne, najbrž že slutimo: če je pin lahko `OUTPUT`, je najbrž la
 
 ## Pisanje funkcij
 
-Najprej napišimo novo funkcijo `switchOn`, ki prižge, recimo, vse diode na pinih od 3 do 9.
+Najprej napišimo novo funkcijo `switchOn`, ki prižge, recimo, vse diode na pinih od 3 do 9. Diode povežemo tako, kot je prikazano na spodnji shemi.
+
+![alt tag](https://github.com/frizider-si/zaslon-iz-vetrnice/blob/master/pictures/MagnetLed.png)
 
 Funkcije pravzaprav že znamo definirati. Že od samega začetka smo pisali funkciji `setup` in `loop`. Njuni imeni sta bili vnaprej določeni, Arduino hoče imeti funkciji s točno takima imenoma. Nihče pa nam ne brani pisati lastnih funkcij v poljubnimi imeni. V resnici gre čisto enako kot pri `setup` in `loop`.
 

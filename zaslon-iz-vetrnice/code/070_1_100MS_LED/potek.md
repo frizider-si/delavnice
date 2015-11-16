@@ -45,9 +45,10 @@ Ko gre magnet mimo magnetnega senzorja, se LED prižgejo za 1ms, v naslednjem kr
         // Ko se zgodi prekinitev, se LED prizgejo. Intervali so 1ms, 2ms, ..., 100ms
         if(interruptFlag){
             if(!ledOnFlag){
-            showLeds(true);
-            lastTime = millis();
-            ledOnFlag = true;
+                showLeds(true);
+                lastTime = millis();
+                ledOnFlag = true;
+            }
         }
         if(millis() - lastTime > delay_ms){
             showLeds(false);
@@ -56,7 +57,6 @@ Ko gre magnet mimo magnetnega senzorja, se LED prižgejo za 1ms, v naslednjem kr
             interruptFlag = false;
         }
     }
-}
 
     void showLeds(boolean show){
   

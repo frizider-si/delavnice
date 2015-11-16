@@ -2,7 +2,7 @@
 
 Komponente vetrnice povežemo tako, kot je prikazano na spodnji shemi.
 
-![alt tag](https://github.com/frizider-si/zaslon-iz-vetrnice/blob/master/pictures/Vetrnica.png)
+![alt tag](../..//pictures/Vetrnica.png)
 
 V funkciji setup() s pomočjo for() zanke nastavimo pine s stevilkami 3,4,5,6,7,8 in 9 kot izhod.
 

@@ -1,6 +1,6 @@
 # delavnice
 
-Do sedaj smo organizirali naslednje delavnice:
+Do sedaj smo uspešno izpeljali naslednje delavnice:
 * [Avtonomno vozilo](./avtonomno-vozilo/)
 * [Bombardiranje z droni](./bombardiranje-z-droni)
 * [Cepelini](./dron-cepelin/)

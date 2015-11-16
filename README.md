@@ -1,2 +1,4 @@
 # delavnice
-opisi delavnic in materiali
+
+Do sedaj smo organizirali sledeče delavnice:
+* [Avtonomno vozilo](./avtonomno-vozilo/)

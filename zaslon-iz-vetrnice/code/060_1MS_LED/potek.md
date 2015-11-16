@@ -25,7 +25,7 @@ V funkciji loop() se nato izvede prvi pogojni stavek(Pogoj je izpolnjen. Spremen
                  action = WAIT;
             }
         }
-    #Celotna koda programa
+#Celotna koda programa
 
     #define DELAY_MS 1
     #define NUM_LEDS 7

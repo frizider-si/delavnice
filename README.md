@@ -1,6 +1,6 @@
 # delavnice
 
-Do sedaj smo uspešno izpeljali naslednje delavnice:
+Do sedaj smo uspešno izpeljali delavnice, ki so na spodnjemu seznamu.
 * [Avtonomno vozilo](./avtonomno-vozilo/)
 * [Bombardiranje z droni](./bombardiranje-z-droni)
 * [Cepelini](./dron-cepelin/)

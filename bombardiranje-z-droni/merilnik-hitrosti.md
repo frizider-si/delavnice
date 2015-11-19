@@ -134,4 +134,6 @@ Spremeni, priklopi USB priključek računalnika na dronov, pretoči program v dr
 
 > Bi znal program spremeniti tako, da izpisoval hitrosti na med zadnjimi nekaj magneti? To je, namesto ene hitrosti bi jih izpisal, recimo, tri?
 
+> Se hitrost na tračnici, po začetni hitrosti veča ali manjša? Ha ha, tole je enostavno vprašanje. Pa znaš to izmeriti? Recimo, spremeni program tako, da na LCD izpišeš hitrost med 3. in 4. ter med 8. in 9. magnetom.
+
 Toliko za tokrat. Kar nas še čaka je delo s servomotorjem in spuščanje krogle iz drona. Oziroma bombadrona. Naslednjič.

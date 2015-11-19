@@ -1,18 +1,18 @@
 # Merilnik hitrosti
 
-Zdaj pa vse skupaj: torej, imamo magnetni senzor in prikazovalnik LCD. Radi bi pisali po LCDju in spreminjali zapis ob aktivaciji magnetnega senzorja.
+Zdaj pa vse skupaj: torej, imamo magnetni senzor in prikazovalnik LCD. Radi bi pisali po LCDju in spreminjali zapis ob aktivacijah magnetnega senzorja.
 
 ![lcd-in-magnetni-senzor](images/lcd-magnet.jpg)
 
 ## Začnemo z vezjem
 
-Najprej zvežemo vezje z LCD-jem. [To že znamo](lcd.md). Sprememba je le, da namesto na Arduino PIN dva ta izhod iz LCD-ja zvežemo na pin 6. To pa zato, ker bomo pin 2 rabili za magnetni senzor.
+Najprej zvežemo vezje z LCD-jem. [To že znamo](lcd.md). Sprememba je le, da vhod LCD-ja, ki gre na Arduino pin 2, zvežemo na pin 6. To pa zato, ker bomo pin 2 na Arduinu rabili za magnetni senzor.
 
-Na pin 2 nato povežemo magnetni senzor. Pin DATA (čisto desno, glej spodnjo sliko) iz magnetnega senzorja gre na pin 2 Arduina. Pin 3,3V (levo) gre na napajalni priključek 3,3V Arduina. Pin GND (sredina, ozemljitev) gre na priključek GND Arduina.
+Pin 2 Arduina nato povežemo z magnetnim senzorjem: pin DATA (čisto desno, glej spodnjo sliko) iz magnetnega senzorja gre na pin 2 Arduina. Pin 3,3V (levo) gre na napajalni priključek 3,3V Arduina. Pin GND (sredina, ozemljitev) gre na priključek GND Arduina.
 
 ![Magnetni senzor - priključki](images/magnetni-senzor.jpg)
 
-Za začetek uporabimo spodnji program. Kaj počne program? Nič pametnega, namenjen je samo temu, da preveri, ali nam LCD dela.
+Za začetek uporabimo spodnji program. Kaj ta počne? Nič pametnega, namenjen je samo temu, da preveri, ali nam LCD in celotno vezje, ki smo ga zgoraj sestavili, dela.
 
     #include "LiquidCrystal.h"
     LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 6);
@@ -30,9 +30,9 @@ Zdaj bi bilo dobro zgornji program spremeniti, da uporabi še magnetni senzor. H
 
     attachInterrupt(digitalPinToInterrupt(2), magnet, RISING);
 
-Aja, to že poznamo. [Prekinitve](prekinitve.md). Zgornje pravi, da ko bomo šli z magnetom mimo senzorja, bo ta na izhodu dal višjo napetost, to povišanje (angleško "rising") pa bo Arduino prepoznal in bo takrat prekinil vse ostalo, kar pač takrat počne, in poklical funkcijo `magnet()`.
+Aja, to že poznamo. [Prekinitve](prekinitve.md). Zgornje pravi, da ko bomo šli z magnetom mimo senzorja, bo ta na izhodu dal višjo napetost, to povišanje (angleško "rising") pa bo Arduino prepoznal in bo takrat prekinil vse ostalo, kar pač takrat počne in poklical funkcijo `magnet()`.
 
-Torej moramo nekam v program dodati še to funkcijo `magnet()`. Recimo, da ta nekaj izpiše na LCD:
+Torej moramo nekam v program dodati še funkcijo `magnet()`. Recimo, da ta nekaj izpiše na LCD:
 
     void magnet() {
       lcd.clear();
@@ -60,12 +60,11 @@ Najbolje, da jo dodamo pred funkcijo `setup()`. Naš program bo sedaj izgledal t
     }
 
 > Kaj počne naš program? 
-> Ali z večkratnim prehodom magneta čez magneti senzor kaj 
-> posebnega spremenimo?
+> Ali z večkratnim prehodom magneta čez senzor kaj posebnega spremenimo?
 
 ## Štetje prehodov magneta
 
-Znamo spremeniti zgornji program tako, da šteje, kolikokrat smo z magnetom šli čez magnetni senzor? Znamo! Deklarirati bomo morali novo spremenljivko ki šteje prehode in jo ob deklaraciji nastaviti na 0:
+Znamo spremeniti zgornji program tako, da šteje, kolikokrat smo z magnetom šli čez magnetni senzor? Znamo! Uvesti bomo morali novo spremenljivko, ki šteje prehode in jo ob deklaraciji nastaviti na 0:
 
     int count = 0;
 

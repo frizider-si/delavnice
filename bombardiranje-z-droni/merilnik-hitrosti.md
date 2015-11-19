@@ -6,7 +6,7 @@ Zdaj pa vse skupaj: torej, imamo magnetni senzor in prikazovalnik LCD. Radi bi p
 
 ## Začnemo z vezjem
 
-Najprej zvežemo vezje z LCD-jem. [To že znamo](lcd). Sprememba je le, da namesto na Arduino PIN dva ta izhod iz LCD-ja zvežemo na pin 6. To pa zato, ker bomo pin 2 rabili za magnetni senzor.
+Najprej zvežemo vezje z LCD-jem. [To že znamo](lcd.md). Sprememba je le, da namesto na Arduino PIN dva ta izhod iz LCD-ja zvežemo na pin 6. To pa zato, ker bomo pin 2 rabili za magnetni senzor.
 
 Na pin 2 nato povežemo magnetni senzor. Pin DATA (čisto desno, glej spodnjo sliko) iz magnetnega senzorja gre na pin 2 Arduina. Pin 3,3V (levo) gre na napajalni priključek 3,3V Arduina. Pin GND (sredina, ozemljitev) gre na priključek GND Arduina.
 

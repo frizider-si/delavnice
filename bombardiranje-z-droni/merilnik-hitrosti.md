@@ -30,7 +30,7 @@ Zdaj bi bilo dobro zgornji program spremeniti, da uporabi še magnetni senzor. H
 
     attachInterrupt(digitalPinToInterrupt(2), magnet, RISING);
 
-Aja, to že poznamo. [Prekinitve](prekinitve). Zgornje pravi, da ko bomo šli z magnetom mimo senzorja, bo ta na izhodu dal višjo napetost, to povišanje (angleško "rising") pa bo Arduino prepoznal in bo takrat prekinil vse ostalo, kar pač takrat počne, in poklical funkcijo `magnet()`.
+Aja, to že poznamo. [Prekinitve](prekinitve.md). Zgornje pravi, da ko bomo šli z magnetom mimo senzorja, bo ta na izhodu dal višjo napetost, to povišanje (angleško "rising") pa bo Arduino prepoznal in bo takrat prekinil vse ostalo, kar pač takrat počne, in poklical funkcijo `magnet()`.
 
 Torej moramo nekam v program dodati še to funkcijo `magnet()`. Recimo, da ta nekaj izpiše na LCD:
 

@@ -122,7 +122,16 @@ Bo šlo? Tudi tokrat je na volj [plonk ceglc](plonk-ceglc.md), ampak če se le d
 
 ## Dron
 
+![Dron](images/dron.jpg)
+
 Končno! Dron. Danes bomo samo merili hitrosti. LCD ekran je na Frižiderjevem dronu povezan malce drugače. Dovolj bo, da v programu namesto obsteječe uporabiš tole vrstico:
 
     LiquidCrystal lcd(13, 12, 11, 6, 5, 4, 3);
 
+Spremeni, priklopi USB priključek računalnika na dronov, pretoči program v dron, poveži Arduino z baterijo, in na tračnice. 
+
+> Kakšne hitrosti dosega zadeva? Je to hitreje, kot hitra hoja? Kako se hitros spreminja s silo, s katero poženeš dron po tračnicah?
+
+> Bi znal program spremeniti tako, da izpisoval hitrosti na med zadnjimi nekaj magneti? To je, namesto ene hitrosti bi jih izpisal, recimo, tri?
+
+Toliko za tokrat. Kar nas še čaka je delo s servomotorjem in spuščanje krogle iz drona. Oziroma bombadrona. Naslednjič.

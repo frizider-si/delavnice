@@ -6,3 +6,4 @@ Ta Frižiderjeva delavnica ni prav nič nevarna. Je pa morda bombastična. Čist
 * [Ekran LCD](lcd.md)
 * [Prekinitve in magnetni senzor](prekinitve.md)
 * [Merilnik hitrosti](merilnik-hitrosti.md)
+* [Dron](dron.md)

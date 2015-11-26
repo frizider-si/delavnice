@@ -142,3 +142,70 @@ Tole gledamo bolj v skrajni sili. Če si prišel do sem slučajno, pojdi raje na
         dropped = true;
       }
     }
+
+## Spust kroglice z upoštevanjem hitrosti
+
+    #include "LiquidCrystal.h"
+    #include "Servo.h"
+
+    LiquidCrystal lcd(13, 12, 11, 6, 5, 4, 3);
+    int servoPin = 10;
+    int servoStart = 115;  // start angle of the servo
+    int servoEnd = 160;  // end position of the servo
+    bool dropped = false;
+    Servo myservo;
+    long lastTime;
+    float v;
+
+    int count = 0;
+
+    void magnet() {
+      long timePassed;
+      
+      count = count + 1;
+      timePassed = millis() - lastTime;
+      lastTime = millis();
+      v = 0.2 / timePassed * 1000;
+      // lcd.clear();
+      lcd.setCursor(0, 1);
+      lcd.print(count);
+    }
+
+    void setup() {
+      lcd.begin(16, 2);
+      lcd.setCursor(0, 0);
+      lcd.print("Frizider");
+      attachInterrupt(digitalPinToInterrupt(2), magnet, RISING);
+      myservo.attach(servoPin);
+      myservo.write(servoStart);
+      delay(500);
+      myservo.detach();
+      lastTime = millis();
+    }
+
+    void loop() {
+      float t, s, sd, td; 
+      
+      if (count == 10 and not dropped) {
+        t = sqrt(2. * 1.25 / 10.); // assumes the hight is 1.25 m
+        s = v * t;
+        sd = 1.0 - s; // assumes the target is 1m away from magnet 10
+        td = sd / v;
+        delay(int(td * 1000));
+        myservo.attach(servoPin);
+        myservo.write(servoEnd); // drop ball
+        delay(1000);
+        myservo.write(servoStart); // put the servo in the start position
+        delay(1000);
+        myservo.detach(); // switch off the servo to spare batteries
+        dropped = true;
+
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print(td);
+        lcd.print(" ");
+        lcd.print(v);
+        lcd.print(" ");
+        lcd.print(sd);
+      }
+    }

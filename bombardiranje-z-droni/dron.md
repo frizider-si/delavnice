@@ -48,7 +48,6 @@ Koda, ki vključuje zgornje ukaze, je spodaj.
 
 Vzemi sedaj kovinsko kuglico, "napolni" dron, in poženi kodo. 
 
-![Dron](images/dron2.jpg)
 
 ## Ciljanje tarče
 
@@ -78,7 +77,11 @@ Najprej štetje magnetov. Program za to smo spisali že zadnjič, zato lahko tu 
 
 ## Ciljanje tarče
 
-Tarčo smo postavili pod magnetom proti koncu dronske ploščadi. Spremeni zgornjo kodo tako, da dron ob prehodu čez ta magnet odvrže kroglo. 
+Tarčo smo za ta del delavnice postavili pod magnetom proti koncu dronske ploščadi. 
+
+![Dron na tračnicah](images/tracnice.jpg)
+
+Spremeni zgornjo kodo tako, da dron ob prehodu čez ta magnet odvrže kroglo. 
 
   1. na vrh programa, kjer deklariramo spremenljivke, dodaj te za servo motor,
   2. dodaj tudi spremenljivko `bool dropped`, ki naj hrani stanje (smo kroglico že odvrgli?)

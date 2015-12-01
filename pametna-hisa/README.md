@@ -304,7 +304,7 @@ Ker ima Raspberry več pinov, lahko dodamo še več takšnih strani, recimo `pri
 Naslednje, česar se lahko lotimo, je lepša stran: namesto povezav bi bilo lepše imeti tipke...
 
 # Delo s senzorji
-
+V frižiderju imamo senzorje premika, zvoka, temperature in vlage:
  ![](figures/senzorji.jpg)  
  ![](figures/DSCF5400.JPG) 
  ![](figures/DSCF5396.JPG)  

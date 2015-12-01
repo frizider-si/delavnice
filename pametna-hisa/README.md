@@ -302,3 +302,9 @@ Takšno ime jima bomo dali seveda le, če v resnici prižigata in ugašata luč.
 Ker ima Raspberry več pinov, lahko dodamo še več takšnih strani, recimo `prizgi_drugi_mesalec_za_beton`, `prizgi_tretji_mesalec_za_beton` in tako naprej - pač odvisno od tega, koliko mešalcev za beton imamo.
 
 Naslednje, česar se lahko lotimo, je lepša stran: namesto povezav bi bilo lepše imeti tipke...
+
+# Delo s senzorji
+
+# Delo z WiFi modulom ESP8266
+
+

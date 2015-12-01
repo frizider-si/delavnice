@@ -312,7 +312,7 @@ Naslednje, česar se lahko lotimo, je lepša stran: namesto povezav bi bilo lep�
  ![](figures/20151119_182749.jpg)
 
 Senzorje smo priključili na mikrokontroler mbed NXP LPC1768.
-Glej:
+Glej: https://github.com/frizider-si/delavnice/tree/master/pametna-hisa/mbed
 
 # Delo z WiFi modulom ESP8266
 

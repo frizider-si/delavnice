@@ -305,9 +305,19 @@ Naslednje, česar se lahko lotimo, je lepša stran: namesto povezav bi bilo lep�
 
 # Delo s senzorji
 
- ![](figures/senzorji.jpg)  ![](figures/DSCF5400.JPG) ![](figures/DSCF5396.JPG)  ![](figures/DSCF5388.JPG)  ![](figures/20151119_182749.jpg)
+ ![](figures/senzorji.jpg)  
+ ![](figures/DSCF5400.JPG) 
+ ![](figures/DSCF5396.JPG)  
+ ![](figures/DSCF5388.JPG)   
+ ![](figures/20151119_182749.jpg)
+
+Senzorje smo priključili na mikrokontroler mbed NXP LPC1768.
+Glej:
 
 # Delo z WiFi modulom ESP8266
 
  ![](figures/wifi.jpg) 
 
+Na WiFi modul ESP8266 verzije 12E naložimo ali strežnik ali odjemalec.
+Glej: https://github.com/frizider-si/delavnice/tree/master/pametna-hisa/esp8266
+ 

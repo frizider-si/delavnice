@@ -305,9 +305,9 @@ Naslednje, česar se lahko lotimo, je lepša stran: namesto povezav bi bilo lep�
 
 # Delo s senzorji
 
-| ![](figures/senzorji.jpg) | ![](figures/s-l1000.jpg) |
+ ![](figures/senzorji.jpg)  ![](figures/DSCF5400.JPG) ![](figures/DSCF5396.JPG)  ![](figures/DSCF5396.JPG)  ![](figures/DSCF5388.JPG)  ![](figures/20151119_182749.jpg)
 
 # Delo z WiFi modulom ESP8266
 
-| ![](figures/wifi.jpg) |
+ ![](figures/wifi.jpg) 
 

@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <SHT2x.h>
 
+
 // Commands used to control motors
 #define FORWARD PORTC = (PORTC & ~0b0001111) | 0b00000101 
 #define STOP_F PORTC = (PORTC & ~0b0001111) | 0b00000000 

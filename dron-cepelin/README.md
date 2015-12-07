@@ -8,6 +8,7 @@ Cepelin sestavljajo naslednje komponente:
 * H-bridge(2x LB1973),
 * senzor vlage(MS5607),
 * temperaturni senzor(SHT21),
+* IR sprejemnik,
 * motorji s propelerji,
 * dve led diodi.
 

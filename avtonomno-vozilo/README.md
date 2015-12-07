@@ -1,9 +1,13 @@
 # avtonomno vozilo
 
-Avtonomno vozilo sestavljajo nadlednje komponente:
+Namen delavnice je sestaviti avtonomno vozilo, ki s pomočjo IR senzorjev sledi črni črti na poligonu.
+
+Vozilo sestavljajo nadlednje komponente:
 * Podvozje s kolesi,
 * arduino uno,
-* H-bridge za krmiljenje motorjev.
+* H-bridge za krmiljenje motorjev,
+* IR senzor
+
 
 
 

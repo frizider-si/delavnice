@@ -5,9 +5,9 @@ Namen delavnice je sestaviti cepelin, ki ga upravljamo s pomočjo IR daljinca.
 Cepelin sestavljajo naslednje komponente:
 * Balon napolnjen s helijem,
 * mikrokontroler atmega328p,
-* H-bridge,
-* senzor vlage,
-* temperaturni senzor,
+* H-bridge(2x LB1973),
+* senzor vlage(MS5607),
+* temperaturni senzor(SHT21),
 * motorji s propelerji,
 * dve led diodi.
 

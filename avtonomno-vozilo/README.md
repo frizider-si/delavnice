@@ -1,9 +1,11 @@
 # avtonomno vozilo
 
 Avtonomno vozilo sestavljajo nadlednje komponente:
-* Podvozje,
+* Podvozje s kolesi,
 * arduino uno,
-* H-bridge,
+* H-bridge za krmiljenje motorjev.
+
+
 
 
 

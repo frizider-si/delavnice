@@ -2,7 +2,7 @@
 
 Namen delavnice je sestaviti avtonomno vozilo, ki s pomočjo IR senzorjev sledi črni črti na poligonu.
 
-![Avtonomno vozilo](../pictures/vozilo.jpeg)
+![Avtonomno vozilo](./pictures/vozilo.jpeg)
 
 Vozilo sestavljajo nadlednje komponente:
 * Podvozje s kolesi,

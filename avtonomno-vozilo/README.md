@@ -1,4 +1,4 @@
-# avtonomno vozilo
+# Avtonomno vozilo
 
 Namen delavnice je sestaviti avtonomno vozilo, ki s pomočjo IR senzorjev sledi črni črti na poligonu.
 

@@ -11,6 +11,7 @@ Vozilo sestavljajo nadlednje komponente:
 * polje IR senzorjev(QTR-3A).
 
 Spodaj je objavljen primer kode preprostega sledenja črti. Komentarji v kodi opisujejo delovanje programa.
+Knjižnico QRTSensors dobimo tu: https://www.pololu.com/docs/0J19/2
 
     #include <QTRSensors.h>
 

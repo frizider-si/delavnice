@@ -81,27 +81,33 @@ Poskusi program. Kaj se izpisuje? Da bomo razumeli, kaj smo dobili - in zakaj to
 
 ## Zvok
 
-Zvok je valovanje zraka. Zvočnik ima membrano, ki se trese. S tem potiska zrak naprej in nazaj, naša ušesa pa to premikanje zraka zaznajo. Lahko si predstavljamo, da zvočnik proizvaja veter, ki izmenično piha naprej in nazaj. Prav tako "zatrese" zrak okrog sebe struna kitare ali violine ali klavirja. Trobenta trobi, piščalka piska in flavta flavta (glagol *flavtati* je nekoliko nov, a očitno smiseln), ker so oblikovane tako, da zanihajo zrak. Če "veter", ki ga proizvajajo, zamenja smer 880-krat na sekundo (440-krat piha naprej in 440-krat nazaj), rečemo, da poslušamo ton A (srednji). Veter ne menja smeri v trenutku in tudi ne stalno; od oblike spreminjanja je odvisno, kakšno barvo ima zvok. Hitrost vetra (fiziki bi v zvezi s tem morda omenjali kar *pritisk*) pa ustreza glasnosti zvoka.
+Zvok je valovanje zraka. Zvočnik ima membrano, ki se trese. S tem potiska zrak naprej in nazaj, naša ušesa pa to premikanje zraka zaznajo. Lahko si predstavljamo, da zvočnik proizvaja veter, ki izmenično piha naprej in nazaj. Prav tako "zatrese" zrak okrog sebe struna kitare ali violine ali klavirja. Trobenta trobi, piščalka piska in flavta flavta (glagol *flavtati* je nekoliko nov, a očitno smiseln), ker so oblikovane tako, da zanihajo zrak.
 
-A dovolj o teoriji. Pomembno je, da vemo, da mikrofon ne meri glasnosti, temveč zaznava te zračne valove, veter. Na pinu `A0` izmerimo, kaj se je dogajalo z zrakom okrog mikrofona - je pihal naprej ali nazaj in kako močno. Krivulja lahko izgleda, recimo, takole:
+Si kdaj naredil telefon iz plastičnih lončkov, povezanih z nitko? Na eni strani nekdo govori vanj. Zaradi tega se trese dno lončka; vrvica ga povezuje z drugim dnom, ki se zato prav tako trese. Tako se tresenje zraka v prvem lončku prek vrvice prenaša v drugi lonček, kjer dno zatrese zrak v njem.
+
+Če bi zabeležili in narisali gibanje dna lončka naprej in nazaj, bi lahko dobili nekaj takšnega:
 
 ![Mikrofon](images/Soundwave-800px.png)
 
-Številka, ki jo izmerimo, sama zase torej nima pomena. Da bi lahko kaj rekli o zvoku, ki ga zaznava, bi morali izmeriti več številk. Recimo sto številk zapored. Največja od njih bi bila potem tem večja, čim glasnejši je zvok. Pravzaprav - zakaj pa ne bi tega naredili?
+Kaj pa počne mikrofon? Predstavljamo si lahko, da mikrofon vsebuje čisto droben plastični lonček (to niti ni tako daleč od resnice - v resnici vsebuje lahko ploščico, ki se trese). Mikrofon v vsakem trenutku izmeri "upognjenost" dna tega lončka; to je številka, ki jo preberemo na pinu `A0`.
 
-**Naloga 5.1** Napiši program, ki v `loop` stokrat izmeri zvok in izpiše največjo izmerjeno številko.
+Številka, ki jo izmerimo, sama zase torej nima pomena, saj je odvisna od tega, kje je bilo dno ravno v trenutku, ko smo merili. Lahko je na eni strani (številka je velika), lahko je na sredi (številka je "srednja") ali na drugi (številka je majhna). 
 
-**Naloga 5.2** Dopolni program, da si bo poleg izpisal tudi najmanjšo izmerjeno številko in jo izpisal.
+Da bi lahko kaj rekli o zvoku, ki ga zaznava, bi morali izmeriti več številk. Recimo sto številk zapored. Največja od njih bi bila potem tem večja, čim glasnejši je zvok. Pravzaprav - zakaj pa ne bi tega naredili?
 
-**Naloga 5.3** Dopolni program, da bo namesto teh dveh številk izpisal razliko med njima.
+**Naloga 4.1** Napiši program, ki v `loop` stokrat izmeri zvok in izpiše največjo izmerjeno številko.
+
+**Naloga 4.2** Dopolni program, da si bo poleg izpisal tudi najmanjšo izmerjeno številko in jo izpisal.
+
+**Naloga 4.3** Dopolni program, da bo namesto teh dveh številk izpisal razliko med njima.
 
 In to je to: številka, ki jo izpisuješ, ustreza glasnosti.
 
-**Naloga 5.4** Ne pozabimo, da imamo sedem diod. Dopolni program tako, da bo število diod, ki svetijo, ustrezalo glasnosti. Če je glasnost enaka 1, naj sveti ena dioda, če 2, dve in tako naprej.
+**Naloga 4.4** Ne pozabimo, da imamo sedem diod. Dopolni program tako, da bo število diod, ki svetijo, ustrezalo glasnosti. Če je glasnost enaka 1, naj sveti ena dioda, če 2, dve in tako naprej.
 
 # Namigi
 
-#### Naloga 5.1
+#### Naloga 4.1
 
 Verjetno boš potreboval kar tri spremenljivke. Z eno boš štel do 100, da boš stokrat ponovil zanko. V drugo boš zapisal, kar izmeriš, tako kot smo naredili v prvem programu za merjenje glasnosti (ki ni dobro delal). V tretjo si boš zapomnil največjo številko, ki si jo nameril do zdaj. Program pa bo (v slovenščini takšen):
 
@@ -117,17 +123,17 @@ Vrednost "najglasnejšega, kar smo slišali doslej", nastavimo na 0, saj vemo, d
 
 Zdaj pa le še prevedi to v jezik, ki ga razume Arduino.
 
-#### Naloga 5.2
+#### Naloga 4.2
 
 Potreboval boš še eno spremenljivko, v kateri bo shranjena najmanjša izmerjena vrednost. Njeno začetno vrednost nastavi na 1000, saj vemo, da boš že v prvem merjenju namerili manj kot 1000.
 
 Znotraj zanke po tem, ko preveriš, ali je izmerjena glasnost glasnejša od najglasnejše, dodaj še preverjanje, ali je tišja od najtišje.
 
-#### Naloga 5.3
+#### Naloga 4.3
 
 Samo zamenjaj dva izpisa z enim, ki izpisuje razliko med največjo najmanjšo vrednostjo.
 
-#### Naloga 5.4
+#### Naloga 4.4
 
 Nalogo lahko rešiš na dva načina (no, na veliko, ampak dva se bistveno razlikujeta). Lahko napišeš kup `if`-ov. Za vsako diodo po enega: če je glasnost večja od toliko in toliko, postavim pripadajoči pin na `HIGH`, sicer na `LOW`.
 
@@ -135,7 +141,7 @@ Lahko pa vse to spraviš v zanko, če znaš.
 
 # Rešitve
 
-#### Naloga 5.1
+#### Naloga 4.1
 
     void setup() {
         Serial.begin(9600);
@@ -155,7 +161,7 @@ Lahko pa vse to spraviš v zanko, če znaš.
         Serial.println(najvecja);
     }
 
-#### Naloga 5.2
+#### Naloga 4.2
 
     void setup() {
         Serial.begin(9600);
@@ -180,7 +186,7 @@ Lahko pa vse to spraviš v zanko, če znaš.
         Serial.println(najmanjsa);
     }
 
-#### Naloga 5.3
+#### Naloga 4.3
 
     void setup() {
         Serial.begin(9600);
@@ -204,7 +210,7 @@ Lahko pa vse to spraviš v zanko, če znaš.
         Serial.println(najvecja - najmanjsa);
     }
 
-#### Naloga 5.4
+#### Naloga 4.4
 
 Rešitev z `if`-i je grozljivo dolga.
 

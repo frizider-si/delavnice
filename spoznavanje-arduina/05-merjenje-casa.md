@@ -8,7 +8,7 @@
 
 **Naloga 4.3** Zdaj pa dodaj v ta program še drugo tipko, ki prižiga drugo diodo.
 
-Ti je uspelo. Imenitno. Zdaj pa poskusi to: pritisni tipko. Medtem ko dioda sveti, pritisni še drugo tipko. Se je druga dioda prižgala (in zakaj ne :)?
+Ti je uspelo? Imenitno. Zdaj pa poskusi to: pritisni tipko. Medtem ko dioda sveti, pritisni še drugo tipko. Se je druga dioda prižgala (in zakaj ne :)?
 
 Arduino čepi v ukazu `delay`. Čaka. Tri sekunde ne počne ničesar. Ne prižiga, ne ugaša - in tudi tipk ne gleda. Program miruje. Ukaz `delay` je bolj zoprna zadeva, kot smo si mislili.
 
@@ -36,9 +36,7 @@ Bojni načrt je takšen:
 
 Ob tem programu se moramo zavedati, da Arduino stalno ponavlja, kar piše v `loop`. Če je dioda prižgana (in tipka ni več pritisnjena) bo stalno gledal, ali je trenutni čas že za več kot 3 s večji od časa, ko smo prižgali diodo. Prej ko slej bo, in takrat jo bomo ugasnili.
 
-Kaj od gornjega že znamo napisati?
-
-Marsikaj od tega že znamo.
+Kaj od gornjega že znamo napisati? Marsikaj.
 
     void setup() {
         pinMode(3, OUTPUT);
@@ -178,6 +176,9 @@ Včasih program raje obrnemo: namesto, kdaj smo prižgali luč, si zapomnimo, kd
 
 **Naloga 4.6** Ta je za prave mojstre: diode naj se prižigajo, ena po ena, z leve proti desni in nazaj. Ne da bi uporabil `delay`. Če narediš to, si res car ali carica.
 
+**Naloga 4.7** Tole bo morda zvenelo zapleteno, vendar ni, saj smo prav vse, kar zahteva ta naloga, že sprogramirali. Dodaj še eno diodo in tipko. Diode se prižigajo in ugašajo kot v prejšnji nalogi. Poleg tega pa naj program preži še na tipko: ko je pritisnjena, se prižge dodatna dioda. Prižgana naj ostane tri sekunde.
+
+
 
 # Namigi
 
@@ -215,6 +216,19 @@ V `loop` ne bo več zanke `while`.
 
 Tudi `i` ne bo smela biti ustvarjena znotraj `loop`, saj si moraš ob različnih klicih `loop` zapomniti, do kje si prišel doslej.
 
+Bo šlo? Še ne? Potem beri naprej.
+
+Namesto `i` pravzaprav uporabljajmo ime `trenutna`. Tako bo jasneje, kaj je shranjeno v njej, namreč številka trenutno prižgane diode. V `naprej_ob` bo shranjeno, kdaj je potrebno iti naprej.
+
+Če je potrebno iti naprej (kot je trenutni čas večji ali enak `naprej_ob`), storimo tole:
+
+    ugasnemo diodo `trenutna`
+    povečamo `trenutna`
+    če je `trenutna` dosegel 10, ga spremenimo na 3
+    prižgamo diodo `trenutna`
+    si zapomnimo, kdaj je potrebno iti naprej (spremenimo `naprej_ob`)
+
+Zdaj pa le pogumno prevedi to v Arduinov jezik.
 
 #### Naloga 4.6. Nazaj in naprej, spet brez `delay`
 
@@ -222,6 +236,9 @@ Poleg tega, katera dioda je prižgana, si moraš zapomniti še smer gibanja.
 
 Smer gibanja bo `+1` ali `-1`. Ko trčiš na rob, jo moraš obrniti.
 
+#### Naloga 4.7. Nazaj in naprej in tipka
+
+To pravzprav ni nič takšnega: dodaj le, kar smo programirali pri nalogi 4.4 (oziroma še prej, ko smo imeli eno samo tipko).
 
 # Rešitve
 
@@ -322,55 +339,54 @@ Smer gibanja bo `+1` ali `-1`. Ko trčiš na rob, jo moraš obrniti.
 
 #### Naloga 4.5. Naprej brez `delay`
 
-V `i` bo shranjeno, katera dioda je trenutno prižgana in v `naprej_ob` bo shranjeno, kdaj je potrebno iti naprej.
+Načrt je bil takšen: v `trenutna` je shranjena številka trenutno prižgane diode, v `naprej_ob` pa čas, ko bo potrebno iti naprej. Ko je torej potrebno iti naprej,
 
-Ko je potrebno iti naprej bomo
-
-    ugasnili diodo i
-    povečali i
-    če je i dosegel 10, ga spremenimo na 3
-    prižgamo diodo i
+    ugasnemo diodo `trenutna`
+    povečamo `trenutna`
+    če je `trenutna` dosegel 10, ga spremenimo na 3
+    prižgamo diodo `trenutna`
     si zapomnimo, kdaj je potrebno iti naprej
 
 Tako:
 
+    int trenutna = 3;
+    long naprej_ob = millis() + 500;
+
     void setup() {
         int i = 3;
         while (i <= 9) {
             pinMode(i, OUTPUT);
             i++;
         }
+        digitalWrite(trenutna, HIGH);
     }
-
-    int i = 3;
-    long naprej_ob = 0;
 
     void loop() {
         if (millis() > naprej_ob)) {
-            digitalWrite(i, LOW);
-            i++;
-            if (i == 10) {
+            digitalWrite(trenuta, LOW);
+            trenutna++;
+            if (trenutna == 10) {
                 i = 3;
             }
-            digitalWrite(i, HIGH);
+            digitalWrite(trenutna, HIGH);
             naprej_ob = millis() + 500;
         }
     }
 
-V začetku je `naprej_ob` enak 0, zato bo `millis()` kar takoj (ali najkasneje v eni tisočinki sekunde) večji od `naprej_ob`.
-
-Katera dioda se bo prva prižgala? Zakaj? Spremeni program tako, da se bo prva prižgala dioda na pinu 3.
+Katera dioda je prva, določimo s `int trenutna = 3;`. Kdaj gremo naprej, v začetku določimo z `long naprej_ob = millis() + 500;`. `setup` nastavi `pinMode` in prižge prvo diodo. Nadaljnji ples vodi `loop`, ki takrat, ko je potrebno (`millis() > naprej_ob`) ugasne to diodo, prižge naslednjo in si zapomni, daj je potrebno narediti naslednji korak.
 
 
-#### Naloga 4.5. Nazaj in naprej - spet brez `delay`
+#### Naloga 4.6. Nazaj in naprej - spet brez `delay`
 
-Na koncu koncev niti ni tako težko.
+V vsakem koraku povečamo `trenutna` za `smer`, torej `trenutna = trenutna + smer;`: Če bo smer enaka `1`, bomo povečali `trenutna` za 1. Če bo smer enaka `-1`, bomo "povečali" `trenutna` za -1 - se pravi, da ga bomo zmanjšali za 1.
 
-V vsakem koraku povečamo `i` za `smer`, torej `i = i + smer;`. Če bo smer enaka `1`, bomo povečali `i` za 1. Če bo smer enaka `-1`, bomo "povečali" `i` za -1 - se pravi, da ga bomo zmanjšali za 1.
-
-Če smo prišli do zadnje diode (`if (i == 9)`) moramo spremeniti smer v -1 (`smer = -1;`), da bomo zmanjševali `i`. Če smo prišli do prve diode (`if (i == 3)`), spremenimo smer v 1 (`smer = 1;`), da bomo povečevali `i`.
+Če smo prišli do zadnje diode (`if (trenutna == 9)`) moramo spremeniti smer v -1 (`smer = -1;`), da bomo zmanjševali `trenutna`. Če smo prišli do prve diode (`if (trenutna == 3)`), spremenimo smer v 1 (`smer = 1;`), da bomo spet povečevali `trenutna`.
 
 To je vsa umetnost.
+
+    int trenutna = 3;
+    int smer = 1;
+    long naprej_ob = millis() + 500;
 
     void setup() {
         int i = 3;
@@ -380,23 +396,63 @@ To je vsa umetnost.
         }
     }
 
-    int i = 3;
-    int smer = 1;
-    long naprej_ob = 0;
-
     void loop() {
         if (millis() > naprej_ob)) {
-            digitalWrite(i, LOW);
-            if (i == 9) {
+            digitalWrite(trenutna, LOW);
+            if (trenutna == 9) {
                 smer = -1;
             }
-            if (i == 3) {
+            if (trenutna == 3) {
                 smer = 1;
             }
-            i = i + smer;
-            digitalWrite(i, HIGH);
+            trenutna = trenutna + smer;
+            digitalWrite(trenutna, HIGH);
             naprej_ob = millis() + 500;
         }
     }
 
 Če si prišel do sem in razumeš vse, kar smo napisali, postajaš čisto pravi programer(ka). Bravo.
+
+
+#### Naloga 4.7. Nazaj in naprej in tipka
+
+Recimo, da je nova dioda na pinu 13, tipka pa na 10.
+
+    int trenutna = 3;
+    int smer = 1;
+    long naprej_ob = millis() + 500;
+    logn ugasni_ob = 0;
+
+    void setup() {
+        int i = 3;
+        while (i <= 9) {
+            pinMode(i, OUTPUT);
+            i++;
+        }
+        pinMode(13, OUTPUT);
+        pinMode(10, INPUT_PULLUP);
+    }
+
+    void loop() {
+        if (millis() > naprej_ob)) {
+            digitalWrite(trenutna, LOW);
+            if (trenutna == 9) {
+                smer = -1;
+            }
+            if (trenutna == 3) {
+                smer = 1;
+            }
+            trenutna = trenutna + smer;
+            digitalWrite(trenutna, HIGH);
+            naprej_ob = millis() + 500;
+        }
+
+        if (digitalRead(10) == LOW) {
+            digitalWrite(13, HIGH);
+            ugasni_ob = millis() + 3000;
+        }
+        if (millis() >= ugasni_ob) {
+            digitalWrite(13, LOW);
+        }
+    }
+

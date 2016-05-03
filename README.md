@@ -7,6 +7,7 @@ Navodila so dostopna naslednje delavnice:
 * [Bombardiranje z droni](./bombardiranje-z-droni)
 * [Pametna hisa](./pametna-hisa)
 * [Zaslon iz vetrnice](zaslon-iz-vetrnice)
+* [Spoznavanje Arduina](spoznavanje-arduina)
 
 Delavnice, ki smo jih izvedli, pa za njih navodila šele pripravljamo, so:
 

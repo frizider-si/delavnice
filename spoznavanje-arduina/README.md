@@ -28,3 +28,5 @@ del vsebuje namige za reševanje nalog. Tretji del so rešitve.
 - [Mikrofon](./04-mikrofon.md): `Serial.print`, `analogRead`, iskanje minimuma in maksimuma
 - [Merjenje časa](./05-merjenje-casa.md): nadomeščanje `delay` z `millis`, globalne spremenljivke
 - [Semafor hrupa](./06-semafor-hrupa.md): bolj zapleten program z merjenjem časa z `millis`
+
+Material prosto uporabljajte skladno z licenco Creative Commons (CC BY-NC-SA): material lahko prosto širite, spreminjate in delite pod enakimi pogoji.

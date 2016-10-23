@@ -174,7 +174,7 @@ Včasih program raje obrnemo: namesto, kdaj smo prižgali luč, si zapomnimo, kd
 
 **Naloga 4.5** Tole pa bo pravi izziv zate. Poglej si program, okrog katerega se je sukala **Naloga 3.5. Kaj dela (2)**. Ga znaš spremeniti tako, da ne bo uporabljal `delay`?
 
-**Naloga 4.6** Ta je za prave mojstre: diode naj se prižigajo, ena po ena, z leve proti desni in nazaj. Ne da bi uporabil `delay`. Če narediš to, si res car ali carica.
+**Naloga 4.6** Ta je za prave mojstre: diode naj se prižigajo, ena po ena, z leve proti desni in nazaj. Ne da bi uporabil `delay`.
 
 **Naloga 4.7** Tole bo morda zvenelo zapleteno, vendar ni, saj smo prav vse, kar zahteva ta naloga, že sprogramirali. Dodaj še eno diodo in tipko. Diode se prižigajo in ugašajo kot v prejšnji nalogi. Poleg tega pa naj program preži še na tipko: ko je pritisnjena, se prižge dodatna dioda. Prižgana naj ostane tri sekunde.
 

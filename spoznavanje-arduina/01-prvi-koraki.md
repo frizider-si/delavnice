@@ -2,19 +2,17 @@
 
 ## Diode in testne plošče
 
-LED dioda je kot majhna žarnica. Kot vsako žarnico jo moramo vključiti v električni krog, tako elektrika teče "skoznjo". Če imamo pred sabo baterijo: žarnico priključimo jo moramo na `+` in `-`, pa bo elektrika tekla iz pozitivnega pola baterije skozi žarnico in v negativnega. (V tem besedilu si bomo privoščili napisati marsikaj, ob čemer bi se fiziki ali elektrotehniki križali. Tole je že bila ena takšnih reči. Tule se jim enkrat za vselej opravičujemo in odslej se bomo na pravorečje požvižgali.)
+LED dioda je kot majhna žarnica. Kot vsako žarnico jo moramo vključiti v električni krog, tako elektrika teče "skoznjo". Če imamo pred sabo baterijo: žarnico priključimo jo na `+` in `-`, pa bo elektrika tekla iz pozitivnega pola baterije skozi žarnico in v negativnega. (V tem besedilu si bomo privoščili napisati marsikaj, ob čemer bi se fiziki ali elektrotehniki križali. Tole je že bila ena takšnih reči. Tule se jim enkrat za vselej opravičujemo in odslej se bomo na pravorečje požvižgali.)
 
-LED se od običajnih žarnic razlikuje po tem, da ni vseeno, kako jo obrnemo. Če pozorno pogledamo njeni nožici, vidimo, da je ena krajša in na to moramo pripeljati minus. To si bomo preprosto zapomnili: minus je tista, ki so jo odrezali. Če imaš pri roki kako baterijo ali kaj podobnega z napetostjo med 3 in 5 volti, lahko poskusiš nanjo priključiti diodo in če jo boš pravilno obrnil, bo svetila, sicer pa ne.
+LED se od običajnih žarnic razlikuje (tudi) po tem, da ni vseeno, kako jo obrnemo. Če pozorno pogledamo njeni nožici, vidimo, da je ena krajša in na to moramo pripeljati minus. To si bomo preprosto zapomnili: *minus je tista, ki so jo odrezali*. Če imaš pri roki kako baterijo ali kaj podobnega z napetostjo med 3 in 5 volti, lahko poskusiš nanjo priključiti diodo in če jo boš pravilno obrnil, bo svetila, sicer pa ne.
 
-Namesto baterije lahko uporabimo tudi Arduina. Na zgornji in spodnji strani (če ga gledamo obrnjenega, kot je na sliki) ima kup "luknjic", ki jim pravimo "pini". (Zakaj bi luknjicam pravili iglice? Različni tovrstni računalniki imajo v resnici iglice; Arduino ima pine, a ker je njihova vloga enaka vlogi iglic na drugih, uporabljamo kar ime "iglice".)
+Namesto baterije lahko uporabimo tudi Arduina. Na zgornji in spodnji strani (če ga gledamo obrnjenega, kot je na sliki) ima kup "luknjic", ki jim pravimo "pini". (Pin je po angleško "igla". Zakaj bi luknjicam pravili iglice? Različni tovrstni računalniki imajo v resnici iglice; Arduino ima luknje, a ker je njihova vloga enaka vlogi iglic na drugih, uporabljamo kar ime "iglice". Se pravi pini.)
 
 ![Arduino Uno](images/ArduinoUno.jpg)
 
-Tvoj Arduino morda ne izgleda popolnoma enako, čeprav je ravno tako Arduino Uno. Če imaš katerega drugega, recimo simpatičnega malega Arduino Nano,
+Tvoj Arduino morda ne izgleda popolnoma enako, čeprav je ravno tako Arduino Uno. Če imaš katerega drugega, recimo simpatičnega malega Arduino Nano, je lahko tudi popolnoma drugačen, oznake pinov pa bodo enake, tako da boš lahko besedilu brez težav sledil tudi z njim. (Razen v naslednjem delčku besedila. Nano ima v resnici iglice, ne luknjic, zato bi vanj še nekoliko težje vtaknil diodo.)
 
 ![Arduino Nano](images/ArduinoNano.jpg)
-
-je lahko tudi popolnoma drugačen, oznake pinov pa bodo enake, tako da boš lahko besedilu brez težav sledil tudi z njim.
 
 Na Arduinove pine bomo priklapljali različne stvari. Da nanj priključimo LED, bomo potrebovali dva: enega, na katerem piše `GND` (takih je več - izbereš lahko kateregakoli) in enega, ob katerem piše `+5V`.
 
@@ -22,15 +20,15 @@ V elektroniki "polov" navadno ne označujemo z `+` in `-`, pozitivnim in negativ
 
 Diodo bomo priključili tako, da bomo potisnili krajšo nožico v pin z oznako `GND` in daljšo v `+5V`. Ne gre, ker dioda ne more narediti špage? Drži. Še bolj ne bo šlo, ko bomo malo kasneje izvedeli, da je potrebno vmes dodati še upornik.
 
-Zato vzemimo v roke še eno čudo: testno ploščo. Z njo bomo sestavljali testna vezja. V ploščo je kup luknjic, v katere zabadamo žičke. Znotraj plošče so luknjice povezane: po dve vrstici ob daljših robovih so povezane vzdolž roba, stolpci pa so povezani poprek. Tale razlaga najbrž ni prav razumljiva, iz slike pa bo vse jasno:
+Zato vzemimo v roke še eno čudo: testno ploščo. Z njo bomo sestavljali testna vezja. V plošči je kup luknjic, v katere zatikamo žičke. Znotraj plošče so luknjice povezane: po dve vrstici ob daljših robovih so povezane vzdolž roba, stolpci pa so povezani poprek. Tale razlaga najbrž ni prav razumljiva, iz slike pa bo vse jasno:
 
 ![Testna plošča - povezave](images/breadboard-connections.png)
 
 Plošče se med seboj nekoliko razlikujejo, na večini pa tečejo povezave, kot nakazujejo zelene črte na sliki. Pazi le na tole: če sta morda in rdeča črta na tvoji testni plošči na sredi prekinjeni, je v resnici prekinjena tudi povezava med levo in desno skupino luknjic na zgornjem in spodnjem robu.
 
-Zdaj Arduinov pin `GND` povežimo z modro vrstico na testni plošči in `+5V` z rdečo. V vezjih, ki jih bomo sestavljali, bomo morda večkrat potrebovali `GND` in `+5V`, in zdaj smo si ga "namnožili": vsi pini ob robovih zdaj "ponujajo" `GND` in `+5V`.
+Zdaj Arduinov pin `GND` povežimo z modro vrstico na testni plošči in `+5V` z rdečo. **Pazi** tole je zelo pomembno. Pozorno poglej sliko, saj se ne smeš zmotiti: `GND` gre v eno vrstico, `+5V` pa v drugo. Če ju vtakneš v isto, lahko pokvariš Arduina. V vezjih, ki jih bomo sestavljali, bomo morda večkrat potrebovali `GND` in `+5V`, in zdaj smo si ga "namnožili": vsi pini ob robovih zdaj "ponujajo" `GND` in `+5V`.
 
-Diodo vstavimo tako da bo ena nožica v enem, druga v drugem stolpcu. Z dodatnima žicama pripeljemo `GND` in `+5` V v tadva stolpca in - dioda sveti.
+Diodo vstavimo tako da bo ena nožica v enem, druga v drugem stolpcu. Z dodatnima žicama pripeljemo `GND` in `+5` V v tadva stolpca in - dioda sveti. Če je posvetila, jo **takoj** potegni spet ven; boš še izvedel, zakaj.
 
 ![LED](images/1.2-led.png)
 
@@ -46,11 +44,11 @@ Recimo, da ti je uspelo in dioda sveti. Zdaj pa jo hitro potegni ven.
 
 ## Uporniki
 
-Čim več stvari poskusimo, pametnejši smo. So pa stvari, ki jih ni pametno preskusiti. Eden od poskusov, ki jih ne priporočam, je vtikanje žarnice iz žepne svetilke v stensko vtičnico. (Recimo, da so nanjo priključene žice in bi to načelno lahko izvedli.) Najmanj, kar se bo zgodilo, je, da bo pošteno počilo, možni pa so tudi pretresljivejši rezultati. Take majhne žarničke pač niso narejene za 230 V napetosti.
+Čim več stvari poskusimo, tem pametnejši smo. So pa stvari, ki jih ni pametno preskusiti. Eden od poskusov, ki jih ne priporočam, je vtikanje žarnice iz žepne svetilke v stensko vtičnico. (Recimo, da so na žarnico priključene žice in bi to načelno lahko izvedli.) Najmanj, kar se bo zgodilo, je, da bo pošteno počilo, možni pa so tudi pretresljivejši rezultati. (Resno, tega **nikoli** ne naredi, saj te elektrika lahko ubije!) Take majhne žarničke pač niso narejene za 230 V napetosti.
 
 Tudi diode same ne smejo biti vezane v električne kroge. Dodati jim moramo upornike. Za upornike si lahko predstavljamo, da "zavirajo" elektriko. Elektriko moramo torej prisiliti, da teče prek diode in še prek upornika.
 
-Uporniki so prepoznavne zadeve. Gre za majhne "valjčke", na katerih so narisani pisani trakci. Upornost (količino, ki pove, kako močno upornik zavira elektriko) merimo v ohmih, po nemškem fiziku Ohmu. (Temu se reče enakopravnost: Volti so imenovani po Italijanu Volti, watti po Angležu Wattu in amperi po Francozu Amperu. Predstavljajte si, da bi se z napetostmi ukvarjal Janez Novak in bi v vtičnicah namesto 230 voltov imeli 230 novakov.) Barve trakcev povedo, za kakšen upornik gre. Ker barv ne znamo brati, si bomo pomagali s tem, kar piše na škatli, v katerih imamo spravljene upornike: uporniki, ki jih bomo uporabljali ob diodah, naj imajo približno 300 ohmov.
+Uporniki so prepoznavne zadeve. Gre za majhne "valjčke", na katerih so narisani pisani trakci. Upornost (količino, ki pove, kako močno upornik zavira elektriko) merimo v ohmih, po nemškem fiziku Ohmu. (Temu se reče enakopravnost: Volti so imenovani po Italijanu Volti, watti po Angležu Wattu in amperi po Francozu Amperu. Predstavljajte si, da bi se z napetostmi ukvarjal Janez Novak in bi v vtičnicah namesto 230 voltov imeli 230 novakov.) Barve trakcev povedo, za kakšen upornik gre. Ker barv ne znamo brati, si bomo pomagali s tem, kar piše na škatli, v katerih imamo spravljene upornike: uporniki, ki jih bomo uporabljali ob diodah, naj imajo približno 150 ohmov.
 
 **Naloga 1.1** Tako smo prišli do prve naloge: zatakni v testno ploščo upornik in diodo ter poveži tako, da bo elektrika tekla od `+5V` skozi diodo, skozi upornik in naprej v `GND`.
 
@@ -66,7 +64,7 @@ Obstajajo tudi zanimivejše reči od diod, ki stalno svetijo. Recimo diode, ki u
 
 Sveti? Ne sveti? Ne vem. Na `D3` je bodisi nič (kot na `GND`; temu rečemo, da je pin v stanju `LOW`) ali +5 V (temu rečemo, da je `HIGH`). Kaj bo na `D3`, določamo s programom. Tega pa moramo napisati.
 
-Zdaj poženemo okolje za pisanje programov v Arduinu.
+Zdaj poženemo okolje za pisanje programov v Arduinu. Imenuje se Arduino. (Če ga na računalniku še ni, ga boš našel na [spletni strani Arduina](https://www.arduino.cc/en/Main/Software)).
 
 Pojavi se okno s praznim programom.
 
@@ -80,21 +78,23 @@ Pojavi se okno s praznim programom.
 
     }
 
-Čemu `void` in čemu vsi ti oklepaji, bomo izvedeli kasneje, sproti. Za zdaj je potrebno vedeti, da znotraj zavitih oklepajev (`{` in `}`, ne `(` in `)`) pri `setup` napišemo, kaj naj Arduino stori ob začetku programa, znotraj tistih pri `loop` pa, kaj naj potem stalno počne, dokler ga ne ugasnemo ali pa mu naročimo kaj drugega.
+Čemu `void` in čemu vsi ti oklepaji, bomo izvedeli kasneje, sproti. Za zdaj je potrebno vedeti, da znotraj zavitih oklepajev (`{` in `}`, ne `(` in `)`) pri `setup` napišemo, kaj naj Arduino stori, ko ga prižgemo (ali ko mu pošljemo program), znotraj tistih pri `loop` pa, kaj naj potem stalno počne, dokler ga ne ugasnemo ali pa mu pošljemo kak drug program.
 
-Ta program očitno najprej ne naredi ničesar (ker je `setup` prazen) in potem ponavlja nič (ker je prazen tudi `loop`). Spremenili ga bomo tako, da bo v začetku, ko se začne izvajati, prižgal LEDico, ki je pripeta na pin `3`. Za to je potrebno storiti dvoje. Najprej moramo Arduinu povedati, da je pin `3` izhodni. Pini so lahko namreč vhodni ali izhodni; na izhodne pripnemo diode, motorje, zvočnike, karkoli že, na vhodne pa razne tipke, senzorje in podobno šaro.
+Ta program očitno najprej ne naredi ničesar (ker je `setup` prazen) in potem ponavlja nič (ker je prazen tudi `loop`). Spremenili ga bomo tako, da bo v začetku, ko se začne izvajati, prižgal LEDico, ki je pripeta na pin `3`. Za to je potrebno storiti dvoje. Najprej moramo Arduinu naročiti, naj bo pin `3` izhodni. Pine lahko namreč uporabljamo za vhod ali izhod. Na izhode pripnemo diode, motorje, zvočnike, skratka stvari, ki jim lahko Arduino sporoči (zato *izhod*, saj gre to *ven* iz Arduina), naj svetijo, se vrtijo in piskajo. Na vhode priklapljamo senzorje, mikrofone, tipke in podobne stvari, ki Arduinu (zato *vhod*, saj gre noter, v Arduina) povedo, ali kaj vidijo, slišijo, ali pa jih kaj tišči.
 
-Da je pin 3 namenjen izhodu, povemo tako, da rečemo
+Naj bo pin 3 namenjen izhodu, določimo tako, da napišemo
+
+    pinMode(3, OUTPUT);
+
+Temu `pinMode` bomo rekli ukaz. (Uradno se temu reče "funkcija", a to nas ne bo vznemirjalo.) Arduino ima veliko različnih ukazov (da ne govorimo o tem, da lahko sestavljamo še svoje). Ukazi imajo lahko "argumente", nekakšne dodatne podatke. Te zapišemo v oklepaje za ukazom. Z ukazom `pinMode` torej Arduino povemo, kakšno vlogo ima določen pin. Ukaz ima dva argumenta, prvi je številka pina, drugi je vloga. Vloga je lahko `OUTPUT` ali `INPUT`; tule hočemo `OUTPUT`, zato torej
 
     pinMode(3, OUTPUT);
 
-Temu `pinMode` bomo rekli ukaz. (Uradno se temu reče "funkcija", a to nas ne bo vznemirjalo.) Arduino ima veliko različnih ukazov (da ne govorimo o tem, da lahko sestavljamo še svoje). Ukazi imajo lahko "argumente"; te zapišemo v oklepaje za ukazom. Z ukazom `pinMode` torej Arduino povemo, kakšno vlogo ima določen pin. Ukaz ima dva argumenta, prvi je številka pina, drugi je vloga. Vloga je lahko `OUTPUT` ali `INPUT`; tule hočemo `OUTPUT`, zato torej
-
-    pinMode(3, OUTPUT);
+Večina programskih jezikov je občutljiva na male in velike črke. Tudi Arduinov je takšen. Besedo `pinMode` je potrebno napisati tako, da napišemo `M` z veliko črko, ostale pa so male. Če namesto tega napišete `pinmode` ali `PinMode` ali `PINmODE`, Arduino tega ukaza ne bo prepoznal.
 
 Na konec vsakega ukaza moramo dati podpičje. Če ga pozabimo, se bo program, ki spravi naš program na Arduino, pritožil, da je z našim programom nekaj narobe. Enako se bo zgodilo, če pozabimo kakšen oklepaj, uporabimo ukaz, ki ne obstaja ali kaj podobnega. Tole bo v začetku malo najedalo - teh napak bo veliko in sporočil o njih ne bomo vedno razumeli. Ko se človek malo izuri, pa dela vedno manj takšnih napak, pa tudi sporočila o njih vedno boljše razume in jih zato vedno hitreje popravlja.
 
-Zdaj na ta pin nekaj "zapišimo". Ukaz za to se imenuje `digitalWrite`. Tudi ta ima dva argumenta; prvi pove, na kateri pin pišemo, drugi pa, kaj pišemo. Kaj je lahko `LOW` ali `HIGH`. Če je `HIGH`, bo dioda bo svetila. Če `LOW` bo ugasnila.
+Zdaj na ta pin nekaj "zapišimo". Ukaz za to se imenuje `digitalWrite`. Tudi ta ima dva argumenta; prvi pove, na kateri pin pišemo, drugi pa, *kaj* pišemo. Ta "*kaj*" je lahko `LOW` ali `HIGH`. Če je `HIGH`, bo dioda bo svetila. Če `LOW` bo ugasnila.
 
 Vse skupaj je torej videti takole: 
 
@@ -112,9 +112,9 @@ V `loop` ni ničesar. Arduino bo torej le prižgal diodo, potem pa ...nič več.
 
 Opazujte, kako oblikujemo program: vse, kar je znotraj `setup` in `loop` smo umaknili za štiri presledke, da je očitno, da je to "znotraj". To bo postalo posebej pomembno kasneje, ko bodo naši programi daljši in bi bili brez zamikanja nepregledni.
 
-Preden spravimo program na Arduina, moramo povedati, kakšnega Arduina imamo. V menuju *Tools* pogledamo pod *Board* in če imamo, recimo Arduino Uno, izberemo tega. Nato v menuju *Tools* izberemo *Port* in poiščemo tisto izbiro, pod katero se pojavi naš Arduino Uno.
+Preden spravimo program na Arduina, moramo povedati, kakšnega Arduina imamo. V menuju *Tools* pogledamo pod *Board* in če imamo, recimo Arduino Uno, izberemo tega. Nato v menuju *Tools* izberemo *Port* in poiščemo tisto izbiro, pod katero se pojavi naš Arduino Uno. Če ga ne vidimo nikjer in se pokaže le, recimo COM1 in COM4, pač poskušamo srečo.
 
-Zdaj kliknemo na ikono s puščico v orodni vrstici zgoraj. Računalnik bo spremenil naš program v obliko, v kateri ga lahko razume in izvaja Arduino, ter ga prek kabla USB prenesel na Arduina, kjer se bo program takoj začel izvajati. Kako napreduje "prevajanje" programa in prenašanje, izvemo v spodnjem delu okna. S tem, kar se izpisuje tam, se nam ni potrebno ukvarjati - razen, kadar v programu naredimo takšno napako, da ga računalnik ne razume. V tem primeru nam bo spodaj izpisal, kaj ga moti, mesto z napako pa označil z rdečo.
+Zdaj kliknemo na ikono s puščico v orodni vrstici zgoraj. Računalnik bo spremenil (učeno se temu reče *prevedel*) naš program v obliko, v kateri ga lahko razume in izvaja Arduino, ter ga prek kabla USB prenesel na Arduina, kjer se bo program takoj začel izvajati. Kako napreduje "prevajanje" programa in prenašanje, izvemo v spodnjem delu okna. S tem, kar se izpisuje tam, se nam ni potrebno ukvarjati - razen, kadar v programu naredimo takšno napako, da ga računalnik ne razume. V tem primeru nam bo spodaj izpisal, kaj ga moti, mesto z napako pa označil z rdečo.
 
 Če torej v programu nismo česa pozabili, ga bo okolje preneslo na Arduino, ta ga bo začel "izvajati" in dioda bo zasvetila (če ni svetila že prej).
 
@@ -132,7 +132,7 @@ Naslednji izziv je LED po prižiganju še ugasniti.
     void loop() {
     }
 
-Za program ne moremo reči, da ne deluje. Pravzaprav moramo reči, da deluje in to celo zelo hitro. Tako hitro, da najbrž niti ne opazimo, da se je dioda prižgala. Če hočemo kaj videti, moramo med prižiganje in ugašanje dodati malo pavze. Temu služi ukaz `delay`. Argument je čas čakanja v milisekundah. Če hočemo, da program počaka eno sekundo, bomo na mestu, kjer mora počakati, napisali `delay(1000)`.
+Za program ne moremo reči, da ne deluje. Pravzaprav moramo reči, da deluje in to celo zelo hitro. Tako hitro, da najbrž niti ne opazimo, da se je dioda prižgala. Če hočemo kaj videti, moramo med prižiganje in ugašanje dodati malo pavze. Temu služi ukaz `delay`. Argument je tokrat le eden, namreč čas čakanja v milisekundah. Če hočemo, da program počaka eno sekundo, bomo na mestu, kjer mora počakati, napisali `delay(1000)`.
 
     void setup() {
         pinMode(3, OUTPUT);
@@ -186,7 +186,7 @@ Razmisli, kako bo tekla elektrika. Predstavljaj si, da so žice cevi, po katerih
 
 ![LED](images/1.3-led-upor.png)
 
-Tole seveda ni edina možna rešitev. Lepo pa je, da se navadiš pripeljati `+5V` na rdečo vrstico in `GND` na modro. Ko bo povezal več, se boš brez takšnih pravil hitro izgubil.
+Tole seveda ni edina možna rešitev. Lepo pa je, da se navadiš pripeljati `+5V` na rdečo vrstico in `GND` na modro. Ko bo povezav več, se boš brez takšnih pravil hitro izgubil.
 
 #### Naloga 1.2. Utripajoča dioda
 
@@ -205,7 +205,7 @@ Napaka je v tem, da med ugašanjem in prižiganjem ni pavze. Dioda se namreč pr
 
 #### Naloga 1.3. Dve rdeči luči
 
-Kako priključiti diode, si poglej v rešitvi naslednje naloge. Razlika je le v tem, da imamo tu eno diodo manj in da sta obe diodi rdeči.
+Kako priključiti diode, si poglej v rešitvi naslednje naloge. Razlika med naslednjo in to je le v tem, da imamo tu le dve diodi in da sta obe rdeči.
 
 Program napišemo tako, da takrat, ko prižge eno diodo, ugasne drugo in obratno. Poleg tega ne smemo pozabiti nastaviti `pinMode` za obe diodi. Mimogrede še malo pospešimo hitrost utripanja tako, da skrajšamo čakanje med njima na pol sekunde (500 ms).
 

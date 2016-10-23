@@ -6,9 +6,9 @@ Za začetek bomo sestavili povsem preprosto vezje s tipko. Če imaš še vedno p
 
 Če moramo napisati `pinMode(3, OUTPUT)`, da povemo, da bomo na pin `D3` pisali, potem si lahko mislimo, da najbrž obstaja tudi `pinMode(3, INPUT)`.
 
-Drži, obstaja. In poleg `digitalWrite` obstaja tudi `digitalRead`. Z `digitalWrite(3, HIGH)` smo Arduino ukazali, naj nastavi napetost na pinu `D3` na 5 voltov (in dioda je svetila), z `digitalWrite(3, LOW)` smo jo spustili na 0 V ("na zemljo") in dioda je ugasnila. Z `digitalRead(3)` preverimo, kakšna je napetost na pinu `D3`.
+Drži, obstaja. In poleg `digitalWrite` obstaja tudi `digitalRead`. Z `digitalWrite(3, HIGH)` smo Arduino ukazali, naj nastavi napetost na pinu `D3` na 5 voltov (in dioda je svetila), z `digitalWrite(3, LOW)` smo jo spustili na 0 V ("na zemljo") in dioda je ugasnila. Z `digitalRead(3)` pa preverimo, kakšna je napetost na pinu `D3`.
 
-To lahko uporabimo, recimo, v pogoju. Sestavi takšnole vezje.
+Sestavi takšnole vezje.
 
 ![LED](images/3.1-naivno.png)
 
@@ -17,51 +17,30 @@ In takšen program.
     void setup() {
         pinMode(3, OUTPUT);
         pinMode(10, INPUT);
-
-        while (digitalRead(10) == HIGH) {
-            digitalWrite(3, HIGH);
-        }
-        digitalWrite(3, LOW);
     }
 
     void loop() {
+        int stanje;
+        stanje = digitalRead(10);
+        digitalWrite(3, stanje);
     }
 
-Dvojni enačaj uporabljamo za primerjanje: pogoj v zanki pravi, *dokler je tisto, kar preberemo na pinu 10, enako HIGH*. Enojni enačaj namreč uporabljamo za prirejanje vrednost (kot v `i = 3;`), zato za primerjanje uporabljamo dvojnega. Da se loči.
+Na pin 3 bomo pisali, z 10 pa brali. To povemo v `setup`. V zanki pa si pripravimo spremenljivko `stanje`. Doslej smo spremenljivke uporabljali zato, da smo vanje shranjevali številke pinov. Tule v spremenljivko preberemo, kakšno je *stanje* na vhodu 10. Rezultat bo `LOW` ali `HIGH`. In to vrednost prepišemo na pin 3.
 
-Program pove, da bo pisal na pin 3 in bral s pina 10. V zanki bere stanje na pinu 10. Ker je ta priključen na rdečo vrstico, ki je povezana z `+5V`, je stanje `HIGH` in zanka se nikoli ne konča. Zdaj pa kar medtem, ko program teče, žico, ki gre na pin 10, iztaknili iz rdeče vrstice in jo vtaknemo v modro. S tem spustimo stanje iz `HIGH` v `LOW`, zanka se konča in program ukasne diodo na pinu 3. Ker je `loop` prazen, se potem ne zgodi nič več.
+Kakšno pa je stanje? Ker je ta priključen na rdečo vrstico, ki je povezana z `+5V`, je stanje `HIGH`; dioda bo torej prižgana. Zdaj pa kar medtem, ko program teče, pretakni žico, ki gre na pin 10, iz rdeče vrstice in v modro: torej, pin 10 naj bo povezan z modro vrstico. S tem spustimo stanje na pinu 10 iz `HIGH` v `LOW` in program ugasne diodo na pinu 3.
 
-Če hočemo videti predstavo ponovno, spet pretaknemo žico v modro vrstico in na Arduino pritisnemo tipko Reset.
-
-Program lahko nekoliko skrajšamo. Nobene potrebe ni, da bi z `digitalWrite(3, HIGH)` vedno znova prižigali že prižgano diodo. To lahko naredimo pred zanko.
+Program bi lahko nekoliko skrajšali. Spremenljivke ne potrebujemo: na izhod 3 lahko napišemo, kar preberemo na vhodu 10.
 
     void setup() {
         pinMode(3, OUTPUT);
         pinMode(10, INPUT);
-
-        digitalWrite(3, HIGH);
-        while (digitalRead(10) == HIGH) {
-        }
-        digitalWrite(3, LOW);
     }
 
     void loop() {
+        digitalWrite(3, digitalRead(10));
     }
 
-Zanka je zdaj hecno prazna. A tako je čisto prav. Dokler ne pretaknemo žice, naj program ne počne ničesar. Zato med zavita oklepaja ne napišemo ničesar. To bomo pisali še krajše, tako
-
-    void setup() {
-        pinMode(3, OUTPUT);
-        pinMode(10, INPUT);
-
-        digitalWrite(3, HIGH);
-        while (digitalRead(10) == HIGH) {}
-        digitalWrite(3, LOW);
-    }
-
-    void loop() {
-    }
-
+A to je grdo. Raje programirajmo lepo, korak za korakom.
 
 ## Tipka
 
@@ -78,29 +57,39 @@ Kaj pa, ko tipka ni pritisnjena? Kakšno je stanje `D10` tedaj? Nihče ne ve. Ka
     void setup() {
         pinMode(3, OUTPUT);
         pinMode(10, INPUT_PULLUP);
-
-        digitalWrite(3, HIGH);
-        while (digitalRead(10) == HIGH) {}
-        digitalWrite(3, LOW);
     }
 
     void loop() {
+        int stanje;
+        stanje = digitalRead(10);
+        digitalWrite(3, stanje);
     }
 
-`INPUT` smo zamenjali z `INPUT_PULLUP`. V angleščini *pull up* pomeni "vleči gor". Arduino bo poskrbel, da bo pin 10 `HIGH`, razen kadar ga bomo z vezjem zvlekli "dol", v `LOW`.
+
+`INPUT` smo zamenjali z `INPUT_PULLUP`. V angleščini *pull up* pomeni "vleči gor". Arduino bo poskrbel, da bo pin 10 `HIGH`, razen kadar ga bomo s pritiskom na tipko zvlekli "dol", v `LOW`.
 
 Zdaj pa le sestavi to vezje in preskusi program!
 
-**Naloga 3.1** Spremeni program tako, da bo dioda svetila, dokler je tipka pritisnjena. Da boš kaj videl, moraš že takrat, ko ga poženeš, tiščati tipko. Ko jo boš spustil, naj dioda ugasne.
 
-**Naloga 3.2** Vrni se k sedmim diodam in programu, v katerem se diode hitro prižigajo od leve proti desni in nazaj. Spremeni ga tako, da se bo, kadar je tipka pritisnjena, ustavil. Ustavi naj se v trenutku, ko je neka dioda prižgana in ne ravno takrat, ko so vse ugasnjene. Če diode dovolj hitro begajo levo in desno, lahko program uporabiš namesto igralne kocke (no, kocke s sedmimi ploskvami): igralec "vrže" 1, če sveti prva dioda, 2, če druga...
+## Zanka, ki ne dela nič
+
+Za predah ena zanimiva zanka. Kaj, misliš, se bo zgodilo, če v vrstico programa napišeš
+
+	while (digitalRead(10) == LOW) {
+    }
+
+*Dokler je tipka pritisnjena, ne delaj ničesar?!* Da, točno to. Če program pride do te vrstice in je tipka pritisnjena, ne more naprej, dokler je ne spustimo.
+
+Doslej smo bili vajeni pogojev, kot je `i < 9`. Za primerjanje, ali sta dve stvari enaki, moramo uporabiti dvojni enečaj. Enojni enačaj namreč uporabljamo za prirejanje vrednost (kot v `i = 3;`), zato za primerjanje uporabljamo dvojnega. Da se loči.
+
+**Naloga 3.1** Vrni se k sedmim diodam in programu, v katerem se diode hitro prižigajo od leve proti desni in nazaj. Spremeni ga tako, da se bo, kadar je tipka pritisnjena, ustavil. Ustavi naj se v trenutku, ko je neka dioda prižgana in ne ravno takrat, ko so vse ugasnjene. Če diode dovolj hitro begajo levo in desno, lahko program uporabiš namesto igralne kocke (no, kocke s sedmimi ploskvami): igralec "vrže" 1, če sveti prva dioda, 2, če druga...
 
 
 ## Pogoji
 
-V programih znamo reči "ponavljaj dokler". Napisati znamo *dokler je `i` manjši od 9* (`while (i < 9)`), *dokler je pritisnjena tipka* (`while (digitalRead(10) == LOW)`) in podobno. Kaj pa, kadar nočemo ponavljati, temveč bi radi nekaj storili *če je pritisnjena tipka*? In kaj drugega, če ni pritisnjena?
+V programih znamo reči *ponavljaj, dokler je to in to res*, na primer *dokler je `i` manjši od 9* (`while (i < 9)`). Kako pa bi rekli *če*? Recimo, *če je pritisnjena tipka*, se pravi, *če je stanje na vhodu 10 LOW*?
 
-*Če* je po angleško `if`, *sicer* pa `else`. V programu ju uporabljamo takole.
+*Če* se po angleško reče *if*.
 
     void setup() {
         pinMode(3, OUTPUT);
@@ -116,14 +105,13 @@ V programih znamo reči "ponavljaj dokler". Napisati znamo *dokler je `i` manjš
         }
     }
 
-`if` je zelo podoben `while`. Besedi `if` sledi v oklepaje zaprt pogoj, nato pa v zavitih oklepajih naštejemo vse, kar naj se zgodi, če je pogoj izpolnjen. Ko zapremo zavite oklepaje, lahko dodamo `else` in za njim v zavitih oklepajih povemo, kaj naj se zgodi, če pogoj ni izpolnjen. Drugi del, `else` in ukaze za njim, smemo tudi izpustiti; v tem primeru se v primeru, da pogoj ni izpolnjen, pač ne bo zgodilo nič.
+`if` je zelo podoben `while`. Besedi `if` sledi v oklepaje zaprt pogoj, nato pa v zavitih oklepajih naštejemo vse, kar naj se zgodi, če je pogoj izpolnjen. Razlika med njima je le, da se tisto, kar napišemo v `if` zgodi le enkrat (no, seveda lahko še kdaj, če izvajanje programa spet pride do tega `if`-a), kar napišemo v `while`, pa se ponavlja, dokler je pogoj izpolnjen.
 
+Za `if` lahko dodamo `else` in za njim v zavitih oklepajih povemo, kaj naj se zgodi, če pogoj ni izpolnjen. Drugi del, `else` in ukaze za njim, smemo tudi izpustiti; v tem primeru se v primeru, da pogoj ni izpolnjen, pač ne bo zgodilo nič.
 
-**Naloga 3.3** Odkrij, kaj dela ta program. Vezje naj bo kar takšno, kot si ga naredil nazadnje.
+**Naloga 3.2** Spet vzemi program, v katerem diode "potujejo" levo in desno. Pomeči ven vrstice, s katerimi si poskrbel, da tipka ustavi premikanje. Zdaj pa naredi tako: če je pritisnjena tipka, naj bo premikanje počasnejše, kot če ni.
 
-**Naloga 3.4** Spet vzemi program, v katerem diode "potujejo" levo in desno. Pomeči ven vrstice, s katerimi si poskrbel, da tipka ustavi premikanje. Zdaj pa naredi tako: če je pritisnjena tipka, naj bo premikanje počasnejše, kot če ni.
-
-**Naloga 3.5** Preskusi tale program. Kaj deluje? Kako deluje? Zakaj deluje? Kaj počne `if` na koncu? (Da te ne bo zmedlo: ne, v tem programu ni tipke.)
+**Naloga 3.3** Preskusi tale program; program predpostavlja, da imaš priključenih sedem diod na pine od 3 do 9. Kaj deluje? Kako deluje? Zakaj deluje? Kaj počne `if` na koncu? (Da te ne bo zmedlo: ne, v tem programu ni tipke.)
 
     void setup() {
         int i = 3;
@@ -146,18 +134,14 @@ V programih znamo reči "ponavljaj dokler". Napisati znamo *dokler je `i` manjš
         }
     }
 
-**Naloga 3.6** Spremeni program iz prejšnje naloge, tako da se bodo diode prižigale v nasprotno smer.
+**Naloga 3.4** Spremeni program iz prejšnje naloge, tako da se bodo diode prižigale v nasprotno smer.
 
-**Naloga 3.7** Čas je, da spet vključimo tipko. Združili bomo zadnji dve nalogi: če je tipka pritisnjena, gremo v eno smer, sicer v drugo.
+**Naloga 3.5** Čas je, da spet vključimo tipko. Združili bomo zadnji dve nalogi: če je tipka pritisnjena, gremo v eno smer, sicer v drugo.
 
 
 # Namigi
 
-#### Naloga 3.1. Dokler je tipka pritisnjena
-
-V programu moraš le spremeniti pogoj, ki govori o tem, doklej naj program ne dela ničesar.
-
-#### Naloga 3.2. Žrebanje
+#### Naloga 3.1. Žrebanje
 
 Saj veš, kako ustaviti program: na primerno mesto napišeš oni `while`, v katerem ni ničesar med zavitimi oklepaji. Na katero mesto ga boš dal?
 
@@ -165,27 +149,24 @@ Pri sestavljanju tega programa se pogosto zmotimo tako, da so, ko pritisnemo sti
 
 Ne znaš sestaviti vezja? Povezave s tipko so enake kot smo jih narisali v začetku: tipka je povezana z `GND` in `D10`. Razlika je le v tem, da ne priključimo ene diode temveč sedem diod, tako kot smo to počeli v prejšnjem delu.
 
-#### Naloga 3.3 Kaj dela?
 
-Za tole ne potrebuješ namiga. Prepiši program in ga preskusi, ne?
-
-#### Naloga 3.4 Hitreje in počasneje
+#### Naloga 3.2 Hitreje in počasneje
 
 Pavza med prižiganjem diod je odvisna od ukaza `delay`. Če (namig: *če*) je pritisnjena tipka, naj bo pavza daljša, če ni, pa krajša.
 
-#### Naloga 3.5: Kaj dela (2)?
+#### Naloga 3.3: Kaj dela?
 
 Ena in ena je vedno dve. Vedno. Kaj to pomeni za zanko, ki se izvaja, dokler je pogoj izpolnjen?
 
 Vrednost `i` povečujemo od 3 do ... Hm, kaj se zgodi, ko pride do 10?
 
-#### Naloga 3.6: V drugo smer
+#### Naloga 3.4: V drugo smer
 
 Namesto, da povečaš `i`, ga moraš zmanjšati.
 
 Moral boš tudi premisliti, kakšna naj bo njegova začetna vrednost (`3` bo sicer verjetno v redu), predvsem pa moraš primerno popraviti pogoj v `if` in tisto, kar je znotraj njega.
 
-#### Naloga 3.7: Sem ali tja
+#### Naloga 3.5: Sem ali tja
 
 Misliš, da potrebuješ dve zanki? Ne. Še vedno bo le ena. Pač pa boš potreboval `if`, ki bo, **če** je tipka pritisnjena, povečal `i`, **sicer** pa ga bo zmanjšal.
 
@@ -193,23 +174,8 @@ Paziti boš moral tudi na obe meji - kaj storiti, če je `i` prilezel do `10` in
 
 # Rešitve
 
-#### Naloga 3.1. Dokler je tipka pritisnjena
 
-Ko je tipka pritisnjena, je `digitalRead(10)` enak `LOW`. Če hočemo, da program čaka, dokler je pritisnjena, torej potrebujemo `while (digitalRead(10) == LOW) {}` namesto `while (digitalRead(10) == HIGH) {}`.
-
-    void setup() {
-        pinMode(3, OUTPUT);
-        pinMode(10, INPUT_PULLUP);
-
-        digitalWrite(3, HIGH);
-        while (digitalRead(10) == LOW) {}
-        digitalWrite(3, LOW);
-    }
-
-    void loop() {
-    }
-
-#### Naloga 3.2. Žrebanje
+#### Naloga 3.1. Žrebanje
 
 Zanko `while`, ki ustavi program, postavimo med `digitalWrite(i, HIGH);` in `digitalWrite(i, LOW);`. Lahko je pred ali za `delay`. Postavimo ga v obe zanki, tisto, ki teče v desno in ono, ki gre v levo.
 
@@ -243,12 +209,7 @@ Zanko `while`, ki ustavi program, postavimo med `digitalWrite(i, HIGH);` in `dig
     }
 
 
-#### Naloga 3.3. Kaj dela?
-
-Če je tipka pritisnjena, prižgemo diodo, sicer jo ugasnemo.
-
-
-#### Naloga 3.4. Hitreje in počasneje
+#### Naloga 3.2. Hitreje in počasneje
 
 Ukaz `delay(20)` (ali kolikor že) moramo zamenjati z
 
@@ -299,13 +260,13 @@ Tako dobimo.
     }
 
 
-#### Naloga 3.5. Kaj dela (2)?
+#### Naloga 3.3. Kaj dela?
 
 Zanka se izvaja za vse večne čase ali dokler ne zmanjka elektrike ali dokler ne ugasnemo Arduina ali dokler mu ne damo drugega programa.
 
 Zanka povečuje `i` od 3 do 10. Ko se poveča na 10, ga takoj spremenimo nazaj na 3, saj na pinu 10 ni diode. Poleg tega v zanki prižgemo in ugasnemo diodo na pinu `i`. Torej bo program po vrsti prižigal diode, vendar ne na levo in na desno, temveč vedno le v eno smer.
 
-#### Naloga 3.6. V drugo smer
+#### Naloga 3.4. V drugo smer
 
 Začetna vrednost `i = 3;` bo čisto v redu. Pravzaprav bi lahko napisali tudi `i = 9;` ali karkoli vmes. Bolj pomemben je pogoj. V prejšnjem programu smo morali `i`, ko je prišel do `i == 10`, spremeniti nazaj v `i = 3;`. Tu pa ravno obratno. Ko pridemo do `i == 2`, postavimo `i` na `9`.
 
@@ -332,7 +293,7 @@ Seveda ne smemo pozabiti spremeni `i++;` v `i--;`.
         }
     }
 
-#### Naloga 3.7. Sem ali tja
+#### Naloga 3.5. Sem ali tja
 
 Z `if (digitalRead(10) == LOW)` se odločamo med `i--;` in `i++;`.
 
